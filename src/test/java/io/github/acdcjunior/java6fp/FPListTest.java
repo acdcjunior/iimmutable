@@ -1,5 +1,6 @@
 package io.github.acdcjunior.java6fp;
 
+import io.github.acdcjunior.java6fp.fn.FPFunction;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -8,7 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
 
 
 @SuppressWarnings("unchecked")

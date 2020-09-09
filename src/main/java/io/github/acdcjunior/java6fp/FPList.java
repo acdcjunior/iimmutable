@@ -1,5 +1,7 @@
 package io.github.acdcjunior.java6fp;
 
+import io.github.acdcjunior.java6fp.fn.FPFunction;
+import io.github.acdcjunior.java6fp.fn.FPPredicate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,11 +21,8 @@ public class FPList<T> implements Iterable<T> {
     }
 
     @NotNull
-    public static <T> FPList<T> listOf(@Nullable Iterable<T> items) {
-        if (items == null) {
-            return emptyList();
-        }
-        return new FPList<T>(FPUtils.toArrayList(items));
+    public static <T> FPList<T> listOf(@Nullable Iterable<T> iterable) {
+        return listOf(iterable == null ? null : iterable.iterator());
     }
 
     @NotNull

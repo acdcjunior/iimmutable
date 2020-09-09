@@ -32,7 +32,7 @@ uploadArchives {
             }
 
             pom.project {
-                name 'Domain ID'
+                name 'Java6 Functional Programming'
                 packaging 'jar'
                 // optionally artifactId can be defined here
                 description 'Simple classes to support functional programming in Java 6'

@@ -7,12 +7,8 @@ import java.util.List;
 
 public class FPUtils {
 
-    public static <T> List<T> toArrayList(Iterable<T> items) {
-        List<T> ls = new ArrayList<T>();
-        for (T item : items) {
-            ls.add(item);
-        }
-        return ls;
+    public static <T> List<T> toArrayList(Iterable<T> iterable) {
+        return toArrayList(iterable.iterator());
     }
 
     public static <T> List<T> toArrayList(Iterator<T> iterator) {
