@@ -1,5 +1,6 @@
 package io.github.acdcjunior.java6fp;
 
+import io.github.acdcjunior.java6fp.fn.FPCommand;
 import io.github.acdcjunior.java6fp.fn.FPConsumer;
 import io.github.acdcjunior.java6fp.fn.FPFunction;
 import io.github.acdcjunior.java6fp.fn.FPSupplier;
@@ -107,15 +108,85 @@ public class FPOptionTest {
     }
 
     @Test
+    public void ifEmpty() {
+        final List<Stuff> ls = new ArrayList<Stuff>();
+        assertThat(FPOption.some(SA).ifEmpty(new FPCommand() {
+            @Override
+            public void run() {
+                ls.add(SA);
+            }
+        })).isEqualTo(FPOption.some(SA));
+        assertThat(FPOption.<Stuff>none().ifEmpty(new FPCommand() {
+            @Override
+            public void run() {
+                ls.add(SB);
+            }
+        })).isEqualTo(FPOption.<Stuff>none());
+
+        assertThat(ls).containsExactly(SB);
+    }
+
+    @Test
+    public void ifDefined() {
+        final List<Stuff> ls = new ArrayList<Stuff>();
+        assertThat(FPOption.some(SA).ifDefined(new FPConsumer<Stuff>() {
+            @Override
+            public void accept(Stuff stuff) {
+                ls.add(stuff);
+            }
+        })).isEqualTo(FPOption.some(SA));
+        assertThat(FPOption.<Stuff>none().ifDefined(new FPConsumer<Stuff>() {
+            @Override
+            public void accept(Stuff stuff) {
+                ls.add(stuff);
+            }
+        })).isEqualTo(FPOption.<Stuff>none());
+
+        assertThat(ls).containsExactly(SA);
+    }
+
+    @Test
     public void orElse() {
         assertThat(FPOption.some(SA).orElse(SB)).isEqualTo(FPOption.some(SA));
         assertThat(FPOption.<Stuff>none().orElse(SB)).isEqualTo(FPOption.some(SB));
     }
 
     @Test
+    public void orElse_supply() {
+        assertThat(FPOption.some(SA).orElse(new FPSupplier<Stuff>() {
+            @Override
+            public Stuff get() {
+                return SB;
+            }
+        })).isEqualTo(FPOption.some(SA));
+        assertThat(FPOption.<Stuff>none().orElse(new FPSupplier<Stuff>() {
+            @Override
+            public Stuff get() {
+                return SB;
+            }
+        })).isEqualTo(FPOption.some(SB));
+    }
+
+    @Test
     public void orElseFlat() {
         assertThat(FPOption.some(SA).orElseFlat(FPOption.some(SB))).isEqualTo(FPOption.some(SA));
         assertThat(FPOption.<Stuff>none().orElseFlat(FPOption.some(SB))).isEqualTo(FPOption.some(SB));
+    }
+
+    @Test
+    public void orElseFlat_supply() {
+        assertThat(FPOption.some(SA).orElseFlat(new FPSupplier<FPOption<Stuff>>() {
+            @Override
+            public FPOption<Stuff> get() {
+                return FPOption.some(SB);
+            }
+        })).isEqualTo(FPOption.some(SA));
+        assertThat(FPOption.<Stuff>none().orElseFlat(new FPSupplier<FPOption<Stuff>>() {
+            @Override
+            public FPOption<Stuff> get() {
+                return FPOption.some(SB);
+            }
+        })).isEqualTo(FPOption.some(SB));
     }
 
     @Test

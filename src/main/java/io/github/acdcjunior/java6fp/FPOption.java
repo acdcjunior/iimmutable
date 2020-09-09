@@ -1,5 +1,6 @@
 package io.github.acdcjunior.java6fp;
 
+import io.github.acdcjunior.java6fp.fn.FPCommand;
 import io.github.acdcjunior.java6fp.fn.FPConsumer;
 import io.github.acdcjunior.java6fp.fn.FPFunction;
 import io.github.acdcjunior.java6fp.fn.FPSupplier;
@@ -41,10 +42,22 @@ public abstract class FPOption<T> implements Iterable<T> {
     }
 
     @NotNull
+    public abstract FPOption<T> ifEmpty(@NotNull FPCommand fn);
+
+    @NotNull
+    public abstract FPOption<T> ifDefined(@NotNull FPConsumer<T> fn);
+
+    @NotNull
     public abstract FPOption<T> orElse(@NotNull T orElse);
 
     @NotNull
+    public abstract FPOption<T> orElse(@NotNull FPSupplier<T> orElseFn);
+
+    @NotNull
     public abstract FPOption<T> orElseFlat(@NotNull FPOption<T> orElse);
+
+    @NotNull
+    public abstract FPOption<T> orElseFlat(@NotNull FPSupplier<FPOption<T>> orElseFn);
 
     @NotNull
     public abstract FPOption<T> filter(@NotNull FPFunction<T, Boolean> fn);
@@ -139,13 +152,38 @@ public abstract class FPOption<T> implements Iterable<T> {
 
         @NotNull
         @Override
+        public FPOption<T> ifEmpty(@NotNull FPCommand fn) {
+            return this;
+        }
+
+        @NotNull
+        @Override
+        public FPOption<T> ifDefined(@NotNull FPConsumer<T> fn) {
+            fn.accept(orNull());
+            return this;
+        }
+
+        @NotNull
+        @Override
         public FPOption<T> orElse(@NotNull T orElse) {
             return this;
         }
 
         @NotNull
         @Override
+        public FPOption<T> orElse(@NotNull FPSupplier<T> orElseFn) {
+            return this;
+        }
+
+        @NotNull
+        @Override
         public FPOption<T> orElseFlat(@NotNull FPOption<T> orElse) {
+            return this;
+        }
+
+        @NotNull
+        @Override
+        public FPOption<T> orElseFlat(@NotNull FPSupplier<FPOption<T>> orElseFn) {
             return this;
         }
 
@@ -230,14 +268,39 @@ public abstract class FPOption<T> implements Iterable<T> {
 
         @NotNull
         @Override
+        public FPOption<T> ifEmpty(@NotNull FPCommand fn) {
+            fn.run();
+            return this;
+        }
+
+        @NotNull
+        @Override
+        public FPOption<T> ifDefined(@NotNull FPConsumer<T> fn) {
+            return this;
+        }
+
+        @NotNull
+        @Override
         public FPOption<T> orElse(@NotNull T orElse) {
             return some(orElse);
         }
 
         @NotNull
         @Override
+        public FPOption<T> orElse(@NotNull FPSupplier<T> orElseFn) {
+            return FPOption.ofNullable(orElseFn.get());
+        }
+
+        @NotNull
+        @Override
         public FPOption<T> orElseFlat(@NotNull FPOption<T> orElse) {
             return orElse;
+        }
+
+        @NotNull
+        @Override
+        public FPOption<T> orElseFlat(@NotNull FPSupplier<FPOption<T>> orElseFn) {
+            return orElseFn.get();
         }
 
         @NotNull
