@@ -9,7 +9,9 @@ already many around, I had some specific requirements:
 
 - The names of the classes should be different from the `java.util` ones.
     - E.g., here I use `FPList` as class name to differentiate from `java.util.List`.
-- Addition of classes as needed.
+    - This is to cause less confusion for inexperienced developers in old codebases.
+- Inclusion of more general classes such as `FPPair`, `FPTriple` and `FPOption`.
+- Addition of classes and methods as needed.
 
 Lastly, it seemed like a good exercise anyway.
 
