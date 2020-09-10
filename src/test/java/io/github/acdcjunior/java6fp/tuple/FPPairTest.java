@@ -14,4 +14,11 @@ public class FPPairTest {
         assertThat(p.getB()).isEqualTo(456);
     }
 
+    @Test
+    @SuppressWarnings("EqualsWithItself")
+    public void equals() {
+        assertThat(FPPair.pairOf(123, 456).equals(FPPair.pairOf(123, 456))).isTrue();
+        assertThat(FPPair.pairOf(123, 456).equals(FPPair.pairOf(456, 123))).isFalse();
+    }
+
 }

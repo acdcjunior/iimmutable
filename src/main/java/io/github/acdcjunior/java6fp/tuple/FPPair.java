@@ -15,6 +15,22 @@ public class FPPair<A, B> {
         this.b = b;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FPPair<?, ?> fpPair = (FPPair<?, ?>) o;
+        if (a != null ? !a.equals(fpPair.a) : fpPair.a != null) return false;
+        return b != null ? b.equals(fpPair.b) : fpPair.b == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = a != null ? a.hashCode() : 0;
+        result = 31 * result + (b != null ? b.hashCode() : 0);
+        return result;
+    }
+
     public A getA() {
         return a;
     }
