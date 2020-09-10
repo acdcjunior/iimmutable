@@ -86,8 +86,9 @@ public abstract class FPOption<T> implements Iterable<T> {
     }
 
     @NotNull
+    @SuppressWarnings("unchecked")
     public static <R> FPOption<R> none() {
-        return new None<R>();
+        return (FPOption<R>) None.NONE;
     }
 
     @NotNull
@@ -220,8 +221,10 @@ public abstract class FPOption<T> implements Iterable<T> {
     }
 
     public static final class None<T> extends FPOption<T> {
-        private None() {
-        }
+
+        public static final None<?> NONE = new None<Object>();
+
+        private None() { }
 
         @Override
         public String toString() {
