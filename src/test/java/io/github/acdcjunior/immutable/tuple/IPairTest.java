@@ -1,15 +1,15 @@
-package io.github.acdcjunior.java6fp.tuple;
+package io.github.acdcjunior.immutable.tuple;
 
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class FPPairTest {
+public class IPairTest {
 
     @Test
     public void pairOf() {
-        FPPair<Integer, Integer> p = FPPair.pairOf(123, 456);
+        IPair<Integer, Integer> p = IPair.pairOf(123, 456);
         assertThat(p.getA()).isEqualTo(123);
         assertThat(p.getB()).isEqualTo(456);
     }
@@ -17,8 +17,8 @@ public class FPPairTest {
     @Test
     @SuppressWarnings("EqualsWithItself")
     public void equals() {
-        assertThat(FPPair.pairOf(123, 456).equals(FPPair.pairOf(123, 456))).isTrue();
-        assertThat(FPPair.pairOf(123, 456).equals(FPPair.pairOf(456, 123))).isFalse();
+        assertThat(IPair.pairOf(123, 456).equals(IPair.pairOf(123, 456))).isTrue();
+        assertThat(IPair.pairOf(123, 456).equals(IPair.pairOf(456, 123))).isFalse();
     }
 
 }

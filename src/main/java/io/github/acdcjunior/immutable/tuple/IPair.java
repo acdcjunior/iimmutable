@@ -1,16 +1,16 @@
-package io.github.acdcjunior.java6fp.tuple;
+package io.github.acdcjunior.immutable.tuple;
 
 
-public class FPPair<A, B> {
+public class IPair<A, B> {
 
-    public static <A, B> FPPair<A, B> pairOf(A a, B b) {
-        return new FPPair<A, B>(a, b);
+    public static <A, B> IPair<A, B> pairOf(A a, B b) {
+        return new IPair<A, B>(a, b);
     }
 
     private final A a;
     private final B b;
 
-    public FPPair(A a, B b) {
+    public IPair(A a, B b) {
         this.a = a;
         this.b = b;
     }
@@ -19,9 +19,9 @@ public class FPPair<A, B> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FPPair<?, ?> fpPair = (FPPair<?, ?>) o;
-        if (a != null ? !a.equals(fpPair.a) : fpPair.a != null) return false;
-        return b != null ? b.equals(fpPair.b) : fpPair.b == null;
+        IPair<?, ?> iPair = (IPair<?, ?>) o;
+        if (a != null ? !a.equals(iPair.a) : iPair.a != null) return false;
+        return b != null ? b.equals(iPair.b) : iPair.b == null;
     }
 
     @Override

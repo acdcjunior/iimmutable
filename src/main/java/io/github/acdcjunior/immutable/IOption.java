@@ -1,9 +1,9 @@
-package io.github.acdcjunior.java6fp;
+package io.github.acdcjunior.immutable;
 
-import io.github.acdcjunior.java6fp.fn.FPCommand;
-import io.github.acdcjunior.java6fp.fn.FPConsumer;
-import io.github.acdcjunior.java6fp.fn.FPFunction;
-import io.github.acdcjunior.java6fp.fn.FPSupplier;
+import io.github.acdcjunior.immutable.fn.ICommand;
+import io.github.acdcjunior.immutable.fn.IConsumer;
+import io.github.acdcjunior.immutable.fn.IFunction;
+import io.github.acdcjunior.immutable.fn.ISupplier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public abstract class FPOption<T> implements Iterable<T> {
+public abstract class IOption<T> implements Iterable<T> {
 
     @NotNull
     public abstract List<T> toList();
@@ -27,7 +27,7 @@ public abstract class FPOption<T> implements Iterable<T> {
     public abstract T getOrElse(@NotNull T orElse);
 
     @NotNull
-    public abstract T getOrElse(@NotNull FPSupplier<? extends T> orElseFn);
+    public abstract T getOrElse(@NotNull ISupplier<? extends T> orElseFn);
 
     /**
      * Throws an exception if the value is none().
@@ -42,33 +42,33 @@ public abstract class FPOption<T> implements Iterable<T> {
     }
 
     @NotNull
-    public abstract FPOption<T> ifEmpty(@NotNull FPCommand fn);
+    public abstract IOption<T> ifEmpty(@NotNull ICommand fn);
 
     @NotNull
-    public abstract FPOption<T> ifDefined(@NotNull FPConsumer<? super T> fn);
+    public abstract IOption<T> ifDefined(@NotNull IConsumer<? super T> fn);
 
     @NotNull
-    public abstract FPOption<T> orElse(@NotNull T orElse);
+    public abstract IOption<T> orElse(@NotNull T orElse);
 
     @NotNull
-    public abstract FPOption<T> orElse(@NotNull FPSupplier<? extends T> orElseFn);
+    public abstract IOption<T> orElse(@NotNull ISupplier<? extends T> orElseFn);
 
     @NotNull
-    public abstract FPOption<T> orElseFlat(@NotNull FPOption<T> orElse);
+    public abstract IOption<T> orElseFlat(@NotNull IOption<T> orElse);
 
     @NotNull
-    public abstract FPOption<T> orElseFlat(@NotNull FPSupplier<FPOption<T>> orElseFn);
+    public abstract IOption<T> orElseFlat(@NotNull ISupplier<IOption<T>> orElseFn);
 
     @NotNull
-    public abstract FPOption<T> filter(@NotNull FPFunction<? super T, Boolean> fn);
+    public abstract IOption<T> filter(@NotNull IFunction<? super T, Boolean> fn);
 
     @NotNull
-    public abstract <R> FPOption<R> map(@NotNull FPFunction<? super T, R> fn);
+    public abstract <R> IOption<R> map(@NotNull IFunction<? super T, R> fn);
 
     @NotNull
-    public abstract <R> FPOption<R> flatMap(@NotNull FPFunction<? super T, FPOption<R>> fn);
+    public abstract <R> IOption<R> flatMap(@NotNull IFunction<? super T, IOption<R>> fn);
 
-    public abstract void forEach(@NotNull FPConsumer<? super T> fn);
+    public abstract void forEach(@NotNull IConsumer<? super T> fn);
 
     @NotNull
     @Override
@@ -78,7 +78,7 @@ public abstract class FPOption<T> implements Iterable<T> {
 
     @NotNull
     @SuppressWarnings("ConstantConditions")
-    public static <R> FPOption<R> some(@NotNull R value) {
+    public static <R> IOption<R> some(@NotNull R value) {
         if (value == null) {
             throw new IllegalArgumentException("Argument of FPOption.Some cannot be null");
         }
@@ -87,16 +87,16 @@ public abstract class FPOption<T> implements Iterable<T> {
 
     @NotNull
     @SuppressWarnings("unchecked")
-    public static <R> FPOption<R> none() {
-        return (FPOption<R>) None.NONE;
+    public static <R> IOption<R> none() {
+        return (IOption<R>) None.NONE;
     }
 
     @NotNull
-    public static <R> FPOption<R> ofNullable(@Nullable R value) {
-        return value == null ? FPOption.<R>none() : some(value);
+    public static <R> IOption<R> ofNullable(@Nullable R value) {
+        return value == null ? IOption.<R>none() : some(value);
     }
 
-    public static final class Some<T> extends FPOption<T> {
+    public static final class Some<T> extends IOption<T> {
         @NotNull
         private final T value;
 
@@ -136,7 +136,7 @@ public abstract class FPOption<T> implements Iterable<T> {
 
         @NotNull
         @Override
-        public T getOrElse(@NotNull FPSupplier<? extends T> orElseFn) {
+        public T getOrElse(@NotNull ISupplier<? extends T> orElseFn) {
             return get();
         }
 
@@ -153,63 +153,63 @@ public abstract class FPOption<T> implements Iterable<T> {
 
         @NotNull
         @Override
-        public FPOption<T> ifEmpty(@NotNull FPCommand fn) {
+        public IOption<T> ifEmpty(@NotNull ICommand fn) {
             return this;
         }
 
         @NotNull
         @Override
-        public FPOption<T> ifDefined(@NotNull FPConsumer<? super T> fn) {
+        public IOption<T> ifDefined(@NotNull IConsumer<? super T> fn) {
             fn.accept(orNull());
             return this;
         }
 
         @NotNull
         @Override
-        public FPOption<T> orElse(@NotNull T orElse) {
+        public IOption<T> orElse(@NotNull T orElse) {
             return this;
         }
 
         @NotNull
         @Override
-        public FPOption<T> orElse(@NotNull FPSupplier<? extends T> orElseFn) {
+        public IOption<T> orElse(@NotNull ISupplier<? extends T> orElseFn) {
             return this;
         }
 
         @NotNull
         @Override
-        public FPOption<T> orElseFlat(@NotNull FPOption<T> orElse) {
+        public IOption<T> orElseFlat(@NotNull IOption<T> orElse) {
             return this;
         }
 
         @NotNull
         @Override
-        public FPOption<T> orElseFlat(@NotNull FPSupplier<FPOption<T>> orElseFn) {
+        public IOption<T> orElseFlat(@NotNull ISupplier<IOption<T>> orElseFn) {
             return this;
         }
 
         @NotNull
         @Override
-        public FPOption<T> filter(@NotNull FPFunction<? super T, Boolean> fn) {
-            return Boolean.TRUE.equals(this.map(fn).orNull()) ? this : FPOption.<T>none();
+        public IOption<T> filter(@NotNull IFunction<? super T, Boolean> fn) {
+            return Boolean.TRUE.equals(this.map(fn).orNull()) ? this : IOption.<T>none();
         }
 
         @NotNull
         @Override
-        public <R> FPOption<R> map(@NotNull FPFunction<? super T, R> fn) {
+        public <R> IOption<R> map(@NotNull IFunction<? super T, R> fn) {
             return ofNullable(fn.apply(this.orNull()));
         }
 
         @NotNull
         @Override
-        public <R> FPOption<R> flatMap(@NotNull FPFunction<? super T, FPOption<R>> fn) {
-            FPOption<R> r = fn.apply(this.orNull());
-            if (r == null) return FPOption.none();
+        public <R> IOption<R> flatMap(@NotNull IFunction<? super T, IOption<R>> fn) {
+            IOption<R> r = fn.apply(this.orNull());
+            if (r == null) return IOption.none();
             return r;
         }
 
         @Override
-        public void forEach(@NotNull FPConsumer<? super T> fn) {
+        public void forEach(@NotNull IConsumer<? super T> fn) {
             fn.accept(this.orNull());
         }
 
@@ -220,7 +220,7 @@ public abstract class FPOption<T> implements Iterable<T> {
         }
     }
 
-    public static final class None<T> extends FPOption<T> {
+    public static final class None<T> extends IOption<T> {
 
         public static final None<?> NONE = new None<Object>();
 
@@ -238,7 +238,7 @@ public abstract class FPOption<T> implements Iterable<T> {
 
         @Override
         public int hashCode() {
-            return FPOption.None.class.hashCode();
+            return IOption.None.class.hashCode();
         }
 
         @Override
@@ -254,7 +254,7 @@ public abstract class FPOption<T> implements Iterable<T> {
 
         @NotNull
         @Override
-        public T getOrElse(@NotNull FPSupplier<? extends T> orElseFn) {
+        public T getOrElse(@NotNull ISupplier<? extends T> orElseFn) {
             return orElseFn.get();
         }
 
@@ -271,61 +271,61 @@ public abstract class FPOption<T> implements Iterable<T> {
 
         @NotNull
         @Override
-        public FPOption<T> ifEmpty(@NotNull FPCommand fn) {
+        public IOption<T> ifEmpty(@NotNull ICommand fn) {
             fn.run();
             return this;
         }
 
         @NotNull
         @Override
-        public FPOption<T> ifDefined(@NotNull FPConsumer<? super T> fn) {
+        public IOption<T> ifDefined(@NotNull IConsumer<? super T> fn) {
             return this;
         }
 
         @NotNull
         @Override
-        public FPOption<T> orElse(@NotNull T orElse) {
+        public IOption<T> orElse(@NotNull T orElse) {
             return some(orElse);
         }
 
         @NotNull
         @Override
-        public FPOption<T> orElse(@NotNull FPSupplier<? extends T> orElseFn) {
-            return FPOption.ofNullable(orElseFn.get());
+        public IOption<T> orElse(@NotNull ISupplier<? extends T> orElseFn) {
+            return IOption.ofNullable(orElseFn.get());
         }
 
         @NotNull
         @Override
-        public FPOption<T> orElseFlat(@NotNull FPOption<T> orElse) {
+        public IOption<T> orElseFlat(@NotNull IOption<T> orElse) {
             return orElse;
         }
 
         @NotNull
         @Override
-        public FPOption<T> orElseFlat(@NotNull FPSupplier<FPOption<T>> orElseFn) {
+        public IOption<T> orElseFlat(@NotNull ISupplier<IOption<T>> orElseFn) {
             return orElseFn.get();
         }
 
         @NotNull
         @Override
-        public FPOption<T> filter(@NotNull FPFunction<? super T, Boolean> fn) {
+        public IOption<T> filter(@NotNull IFunction<? super T, Boolean> fn) {
             return this;
         }
 
         @NotNull
         @Override
-        public <R> FPOption<R> map(@NotNull FPFunction<? super T, R> fn) {
+        public <R> IOption<R> map(@NotNull IFunction<? super T, R> fn) {
             return none();
         }
 
         @NotNull
         @Override
-        public <R> FPOption<R> flatMap(@NotNull FPFunction<? super T, FPOption<R>> fn) {
+        public <R> IOption<R> flatMap(@NotNull IFunction<? super T, IOption<R>> fn) {
             return none();
         }
 
         @Override
-        public void forEach(@NotNull FPConsumer<? super T> fn) {
+        public void forEach(@NotNull IConsumer<? super T> fn) {
         }
 
         @NotNull

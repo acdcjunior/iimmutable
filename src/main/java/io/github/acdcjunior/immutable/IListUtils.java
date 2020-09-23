@@ -1,11 +1,11 @@
-package io.github.acdcjunior.java6fp;
+package io.github.acdcjunior.immutable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 
-public class FPUtils {
+public class IListUtils {
 
     public static <T> List<T> toArrayList(Iterable<T> iterable) {
         return toArrayList(iterable.iterator());

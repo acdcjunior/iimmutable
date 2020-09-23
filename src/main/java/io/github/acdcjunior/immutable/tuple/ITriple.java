@@ -1,17 +1,17 @@
-package io.github.acdcjunior.java6fp.tuple;
+package io.github.acdcjunior.immutable.tuple;
 
 
-public class FPTriple<A, B, C> {
+public class ITriple<A, B, C> {
 
-    public static <A, B, C> FPTriple<A, B, C> tripleOf(A a, B b, C c) {
-        return new FPTriple<A, B, C>(a, b, c);
+    public static <A, B, C> ITriple<A, B, C> tripleOf(A a, B b, C c) {
+        return new ITriple<A, B, C>(a, b, c);
     }
 
     private final A a;
     private final B b;
     private final C c;
 
-    public FPTriple(A a, B b, C c) {
+    public ITriple(A a, B b, C c) {
         this.a = a;
         this.b = b;
         this.c = c;
@@ -21,10 +21,10 @@ public class FPTriple<A, B, C> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FPTriple<?, ?, ?> fpTriple = (FPTriple<?, ?, ?>) o;
-        if (a != null ? !a.equals(fpTriple.a) : fpTriple.a != null) return false;
-        if (b != null ? !b.equals(fpTriple.b) : fpTriple.b != null) return false;
-        return c != null ? c.equals(fpTriple.c) : fpTriple.c == null;
+        ITriple<?, ?, ?> iTriple = (ITriple<?, ?, ?>) o;
+        if (a != null ? !a.equals(iTriple.a) : iTriple.a != null) return false;
+        if (b != null ? !b.equals(iTriple.b) : iTriple.b != null) return false;
+        return c != null ? c.equals(iTriple.c) : iTriple.c == null;
     }
 
     @Override
