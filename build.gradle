@@ -19,3 +19,9 @@ dependencies {
 }
 
 apply from: 'maven-central.gradle'
+
+gradle.projectsEvaluated {
+	tasks.withType(JavaCompile) {
+		options.compilerArgs << "-Xlint:unchecked"
+	}
+}

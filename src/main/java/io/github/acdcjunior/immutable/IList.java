@@ -17,6 +17,7 @@ public class IList<T> implements Iterable<T> {
     public static final IList EMPTY_ILIST = new IList(Collections.emptyList());
 
     @NotNull
+    @Contract(pure = true)
     public static <T> IList<T> listOf(@Nullable Iterator<T> iterator) {
         if (iterator == null) {
             return emptyList();
@@ -25,17 +26,29 @@ public class IList<T> implements Iterable<T> {
     }
 
     @NotNull
+    @Contract(pure = true)
     public static <T> IList<T> listOf(@Nullable Iterable<T> iterable) {
         return listOf(iterable == null ? null : iterable.iterator());
     }
 
-    @NotNull
-    public static <T> IList<T> listOf(@Nullable T... items) {
+    private static <T> IList<T> listOfVarags(@Nullable T... items) {
         if (items == null || items.length == 0) {
             return emptyList();
         }
         return new IList<T>(new ArrayList<T>(Arrays.asList(items)));
     }
+
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1) { return listOfVarags(t1); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2) { return listOfVarags(t1, t2); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3) { return listOfVarags(t1, t2, t3); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4) { return listOfVarags(t1, t2, t3, t4); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5) { return listOfVarags(t1, t2, t3, t4, t5); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5, T t6) { return listOfVarags(t1, t2, t3, t4, t5, t6); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5, T t6, T t7) { return listOfVarags(t1, t2, t3, t4, t5, t6, t7); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8) { return listOfVarags(t1, t2, t3, t4, t5, t6, t7, t8); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8, T t9) { return listOfVarags(t1, t2, t3, t4, t5, t6, t7, t8, t9); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8, T t9, T t10) { return listOfVarags(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10); }
+    @NotNull @Contract(pure = true) public static <T> IList<T> listOf(@Nullable T... items) { return listOfVarags(items); }
 
     @SuppressWarnings("unchecked")
     public static <T> IList<T> emptyList() {
@@ -106,9 +119,7 @@ public class IList<T> implements Iterable<T> {
         return new IList<T>(rs);
     }
 
-    @NotNull
-    @Contract(pure = true)
-    public final IList<T> concat(Iterable<? extends T>... iterables) {
+    private IList<T> concatVarargs(Iterable<? extends T>... iterables) {
         List<T> ls = new ArrayList<T>(immutableBackingList.size() + iterables.length * ARRAYLIST_DEFAULT_CAPACITY);
         ls.addAll(immutableBackingList);
         for (Iterable<? extends T> iterable : iterables) {
@@ -118,6 +129,13 @@ public class IList<T> implements Iterable<T> {
         }
         return new IList<T>(ls);
     }
+
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public final IList<T> concat(Iterable<? extends T> it1) { return concatVarargs(it1); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public final IList<T> concat(Iterable<? extends T> it1, Iterable<? extends T> it2) { return concatVarargs(it1, it2); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public final IList<T> concat(Iterable<? extends T> it1, Iterable<? extends T> it2, Iterable<? extends T> it3) { return concatVarargs(it1, it2, it3); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public final IList<T> concat(Iterable<? extends T> it1, Iterable<? extends T> it2, Iterable<? extends T> it3, Iterable<? extends T> it4) { return concatVarargs(it1, it2, it3, it4); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public final IList<T> concat(Iterable<? extends T> it1, Iterable<? extends T> it2, Iterable<? extends T> it3, Iterable<? extends T> it4, Iterable<? extends T> it5) { return concatVarargs(it1, it2, it3, it4, it5); }
+    @NotNull @Contract(pure = true) public final IList<T> concat(Iterable<? extends T>... iterables) { return concatVarargs(iterables); }
 
     @NotNull
     @Contract(pure = true)
@@ -149,24 +167,39 @@ public class IList<T> implements Iterable<T> {
         });
     }
 
-    @NotNull
-    @Contract(pure = true)
-    public final IList<T> subtract(T... c) {
+    private IList<T> subtractVarags(T... c) {
         return subtract(listOf(c));
     }
 
-    @NotNull
-    @Contract(pure = true)
-    public final IList<T> plus(@NotNull Iterable<? extends T>... others) {
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> subtract(T t1) { return subtractVarags(t1); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> subtract(T t1, T t2) { return subtractVarags(t1, t2); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> subtract(T t1, T t2, T t3) { return subtractVarags(t1, t2, t3); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> subtract(T t1, T t2, T t3, T t4) { return subtractVarags(t1, t2, t3, t4); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> subtract(T t1, T t2, T t3, T t4, T t5) { return subtractVarags(t1, t2, t3, t4, t5); }
+    @NotNull @Contract(pure = true) public IList<T> subtract(T... c) { return subtractVarags(c); }
+
+    private IList<T> plusVarargs(@NotNull Iterable<? extends T>... others) {
         return concat(others);
     }
 
-    @NotNull
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(@NotNull Iterable<? extends T> it1) { return plusVarargs(it1); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(@NotNull Iterable<? extends T> it1, @NotNull Iterable<? extends T> it2) { return plusVarargs(it1, it2); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(@NotNull Iterable<? extends T> it1, @NotNull Iterable<? extends T> it2, @NotNull Iterable<? extends T> it3) { return plusVarargs(it1, it2, it3); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(@NotNull Iterable<? extends T> it1, @NotNull Iterable<? extends T> it2, @NotNull Iterable<? extends T> it3, @NotNull Iterable<? extends T> it4) { return plusVarargs(it1, it2, it3, it4); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(@NotNull Iterable<? extends T> it1, @NotNull Iterable<? extends T> it2, @NotNull Iterable<? extends T> it3, @NotNull Iterable<? extends T> it4, @NotNull Iterable<? extends T> it5) { return plusVarargs(it1, it2, it3, it4, it5); }
+    @NotNull @Contract(pure = true) public IList<T> plus(@NotNull Iterable<? extends T>... others) { return plusVarargs(others); }
+
     @SuppressWarnings("unchecked")
-    @Contract(pure = true)
-    public final IList<T> plus(T... c) {
-        return plus(listOf(c));
+    private IList<T> plusVarargs(T... c) {
+        return plusVarargs(listOf(c));
     }
+
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(T t1) { return plusVarargs(t1); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(T t1, T t2) { return plusVarargs(t1, t2); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(T t1, T t2, T t3) { return plusVarargs(t1, t2, t3); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(T t1, T t2, T t3, T t4) { return plusVarargs(t1, t2, t3, t4); }
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(T t1, T t2, T t3, T t4, T t5) { return plusVarargs(t1, t2, t3, t4, t5); }
+    @NotNull @Contract(pure = true) public IList<T> plus(T... c) { return plusVarargs(c); }
 
     @Contract(pure = true)
     public boolean isEmpty() {
