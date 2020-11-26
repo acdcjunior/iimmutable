@@ -96,6 +96,9 @@ public abstract class IOption<T> implements Iterable<T> {
         return value == null ? IOption.<R>none() : some(value);
     }
 
+    @NotNull
+    public abstract <L> IEither<L, T> toEither(ISupplier<L> ifNone);
+
     public static final class Some<T> extends IOption<T> {
         @NotNull
         private final T value;
@@ -215,6 +218,12 @@ public abstract class IOption<T> implements Iterable<T> {
 
         @NotNull
         @Override
+        public <L> IEither<L, T> toEither(ISupplier<L> ifNone) {
+            return IEither.right(get());
+        }
+
+        @NotNull
+        @Override
         public List<T> toList() {
             return Collections.singletonList(this.orNull());
         }
@@ -326,6 +335,12 @@ public abstract class IOption<T> implements Iterable<T> {
 
         @Override
         public void forEach(@NotNull IConsumer<? super T> fn) {
+        }
+
+        @NotNull
+        @Override
+        public <L> IEither<L, T> toEither(ISupplier<L> ifNone) {
+            return IEither.left(ifNone.get());
         }
 
         @NotNull
