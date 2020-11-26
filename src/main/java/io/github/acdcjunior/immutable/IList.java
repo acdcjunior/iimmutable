@@ -13,6 +13,9 @@ public class IList<T> implements Iterable<T> {
 
     public static final int ARRAYLIST_DEFAULT_CAPACITY = 10;
 
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public static final IList EMPTY_ILIST = new IList(Collections.emptyList());
+
     @NotNull
     public static <T> IList<T> listOf(@Nullable Iterator<T> iterator) {
         if (iterator == null) {
@@ -34,8 +37,9 @@ public class IList<T> implements Iterable<T> {
         return new IList<T>(new ArrayList<T>(Arrays.asList(items)));
     }
 
+    @SuppressWarnings("unchecked")
     private static <T> IList<T> emptyList() {
-        return new IList<T>(Collections.<T>emptyList());
+        return (IList<T>) EMPTY_ILIST;
     }
 
     @NotNull
