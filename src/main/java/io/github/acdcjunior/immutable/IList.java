@@ -38,7 +38,7 @@ public class IList<T> implements Iterable<T> {
     }
 
     @SuppressWarnings("unchecked")
-    private static <T> IList<T> emptyList() {
+    public static <T> IList<T> emptyList() {
         return (IList<T>) EMPTY_ILIST;
     }
 

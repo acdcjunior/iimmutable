@@ -115,4 +115,10 @@ public class IListTest {
         assertThat(IList.listOf().first().isDefined()).isEqualTo(false);
     }
 
+    @Test
+    public void emptyList() {
+        assertThat(IList.emptyList()).isEmpty();
+        assertThat(IList.emptyList()).isSameAs(IList.emptyList());
+    }
+
 }
