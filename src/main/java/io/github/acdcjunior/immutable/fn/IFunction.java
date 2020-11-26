@@ -1,8 +1,8 @@
 package io.github.acdcjunior.immutable.fn;
 
 
-public interface IFunction<F, T> {
+public interface IFunction<P, R> {
 
-  T apply(F input);
+  R apply(P input);
 
 }
