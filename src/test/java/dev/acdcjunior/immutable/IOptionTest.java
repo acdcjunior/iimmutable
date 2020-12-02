@@ -1,21 +1,22 @@
-package io.github.acdcjunior.immutable;
+package dev.acdcjunior.immutable;
 
-import io.github.acdcjunior.immutable.fn.ICommand;
-import io.github.acdcjunior.immutable.fn.IConsumer;
-import io.github.acdcjunior.immutable.fn.IFunction;
-import io.github.acdcjunior.immutable.fn.ISupplier;
+import dev.acdcjunior.immutable.fn.ICommand;
+import dev.acdcjunior.immutable.fn.IConsumer;
+import dev.acdcjunior.immutable.fn.IFunction;
+import dev.acdcjunior.immutable.fn.ISupplier;
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 public class IOptionTest {
 
-    public static final IOption<Stuff> aNone = IOption.<Stuff>none();
+    public static final IOption<Stuff> aNone = IOption.none();
 
     private static class Stuff {
         private final char val;

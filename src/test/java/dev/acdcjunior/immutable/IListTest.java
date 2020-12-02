@@ -1,6 +1,6 @@
-package io.github.acdcjunior.immutable;
+package dev.acdcjunior.immutable;
 
-import io.github.acdcjunior.immutable.fn.IFunction;
+import dev.acdcjunior.immutable.fn.IFunction;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 

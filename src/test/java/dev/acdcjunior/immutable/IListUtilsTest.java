@@ -1,4 +1,4 @@
-package io.github.acdcjunior.immutable;
+package dev.acdcjunior.immutable;
 
 import org.junit.Test;
 

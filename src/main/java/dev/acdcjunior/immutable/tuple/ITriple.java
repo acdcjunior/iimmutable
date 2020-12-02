@@ -1,4 +1,4 @@
-package io.github.acdcjunior.immutable.tuple;
+package dev.acdcjunior.immutable.tuple;
 
 
 public class ITriple<A, B, C> {

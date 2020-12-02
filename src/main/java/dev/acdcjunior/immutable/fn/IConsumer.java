@@ -1,4 +1,4 @@
-package io.github.acdcjunior.immutable.fn;
+package dev.acdcjunior.immutable.fn;
 
 
 public interface IConsumer<T> {

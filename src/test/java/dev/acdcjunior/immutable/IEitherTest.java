@@ -1,9 +1,8 @@
-package io.github.acdcjunior.immutable;
+package dev.acdcjunior.immutable;
 
-import io.github.acdcjunior.immutable.fn.IConsumer;
-import io.github.acdcjunior.immutable.fn.IFunction;
-import io.github.acdcjunior.immutable.tuple.IPair;
-import org.junit.Ignore;
+import dev.acdcjunior.immutable.fn.IConsumer;
+import dev.acdcjunior.immutable.fn.IFunction;
+import dev.acdcjunior.immutable.tuple.IPair;
 import org.junit.Test;
 
 import java.util.concurrent.atomic.AtomicReference;

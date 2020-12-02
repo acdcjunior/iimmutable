@@ -1,13 +1,13 @@
-package io.github.acdcjunior.immutable;
+package dev.acdcjunior.immutable;
 
-import io.github.acdcjunior.immutable.fn.IConsumer;
-import io.github.acdcjunior.immutable.fn.IFunction;
+import dev.acdcjunior.immutable.fn.IConsumer;
+import dev.acdcjunior.immutable.fn.IFunction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
 
-import static io.github.acdcjunior.immutable.IList.listOf;
+import static dev.acdcjunior.immutable.IList.listOf;
 
 
 /**
@@ -279,4 +279,3 @@ public abstract class IEither<L, R> implements Iterable<R> {
     }
 
 }
-

@@ -1,9 +1,9 @@
-package io.github.acdcjunior.immutable;
+package dev.acdcjunior.immutable;
 
-import io.github.acdcjunior.immutable.fn.ICommand;
-import io.github.acdcjunior.immutable.fn.IConsumer;
-import io.github.acdcjunior.immutable.fn.IFunction;
-import io.github.acdcjunior.immutable.fn.ISupplier;
+import dev.acdcjunior.immutable.fn.ICommand;
+import dev.acdcjunior.immutable.fn.IConsumer;
+import dev.acdcjunior.immutable.fn.IFunction;
+import dev.acdcjunior.immutable.fn.ISupplier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

@@ -1,7 +1,7 @@
-package io.github.acdcjunior.immutable;
+package dev.acdcjunior.immutable;
 
-import io.github.acdcjunior.immutable.fn.IFunction;
-import io.github.acdcjunior.immutable.fn.IPredicate;
+import dev.acdcjunior.immutable.fn.IFunction;
+import dev.acdcjunior.immutable.fn.IPredicate;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
