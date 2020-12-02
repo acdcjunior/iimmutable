@@ -2,7 +2,7 @@ plugins {
 	id 'java'
 }
 
-group = 'io.github.acdcjunior'
+group = 'dev.acdcjunior'
 archivesBaseName = 'java6-functional-immutable'
 version = '1.0.0'
 sourceCompatibility = 1.6
