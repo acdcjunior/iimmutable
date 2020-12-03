@@ -83,8 +83,8 @@ public class IListTest {
                 return is.iterator();
             }
         };
-        List<Integer> fpl = IList.listOf(iterable).toList();
-        assertThat(fpl).isEqualTo(is);
+        List<Integer> asList = IList.listOf(iterable).toList();
+        assertThat(asList).isEqualTo(is);
     }
 
     @Test

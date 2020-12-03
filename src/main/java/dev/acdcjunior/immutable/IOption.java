@@ -85,7 +85,7 @@ public abstract class IOption<T> implements Iterable<T> {
     @SuppressWarnings("ConstantConditions")
     public static <R> IOption<R> some(@NotNull R value) {
         if (value == null) {
-            throw new IllegalArgumentException("Argument of FPOption.Some cannot be null");
+            throw new IllegalArgumentException("Argument of IOption.Some cannot be null");
         }
         return new Some<R>(value);
     }
@@ -275,7 +275,7 @@ public abstract class IOption<T> implements Iterable<T> {
         @NotNull
         @Override
         public T get() {
-            throw new IllegalStateException("FPOption.None has no value");
+            throw new IllegalStateException("IOption.None has no value");
         }
 
         @Override
