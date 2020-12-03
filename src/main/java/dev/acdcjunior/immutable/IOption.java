@@ -18,7 +18,9 @@ public abstract class IOption<T> implements Iterable<T> {
     public abstract List<T> toList();
 
     /**
-     * Returns null if the value is none().
+     * Returns the current option's value or <code>null</code> if this option is {@link None}.
+     *
+     * @return The value for this option, <code>null</code> if this option is {@link None}.
      */
     @Nullable
     public abstract T orNull();
@@ -30,7 +32,10 @@ public abstract class IOption<T> implements Iterable<T> {
     public abstract T getOrElse(@NotNull ISupplier<? extends T> orElseFn);
 
     /**
-     * Throws an exception if the value is none().
+     * Throws an exception if this option is {@link None}.
+     *
+     * @return The value for this option.
+     * @throws IllegalStateException if this option is {@link None}.
      */
     @NotNull
     public abstract T get();
