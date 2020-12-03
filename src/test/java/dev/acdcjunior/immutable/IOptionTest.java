@@ -4,14 +4,13 @@ import dev.acdcjunior.immutable.fn.ICommand;
 import dev.acdcjunior.immutable.fn.IConsumer;
 import dev.acdcjunior.immutable.fn.IFunction;
 import dev.acdcjunior.immutable.fn.ISupplier;
-import org.assertj.core.api.ThrowableAssert;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.fail;
 
 
 public class IOptionTest {
@@ -41,16 +40,16 @@ public class IOptionTest {
         }
     };
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     public void some() {
         assertThat(aSome).isEqualTo(aSome);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            @SuppressWarnings("ConstantConditions")
-            public void call() {
-                IOption.some(null);
-            }
-        }).hasMessage("Argument of FPOption.Some cannot be null");
+        try {
+            IOption.some(null);
+            fail("Should have thrown exception");
+        } catch (Exception e) {
+            assertThat(e).hasMessage("Argument of IOption.Some cannot be null");
+        }
     }
 
     @Test
@@ -91,12 +90,12 @@ public class IOptionTest {
     @Test
     public void get() {
         assertThat(aSome.get()).isSameAs(SA);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() {
-                IOption.none().get();
-            }
-        }).hasMessage("FPOption.None has no value");
+        try {
+            IOption.none().get();
+            fail("Should have thrown exception");
+        } catch (Exception e) {
+            assertThat(e).hasMessage("IOption.None has no value");
+        }
     }
 
     @Test
