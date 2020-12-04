@@ -32,22 +32,22 @@ uploadArchives {
             }
 
             pom.project {
-                name 'Java6 Functional Programming'
+                name 'Java6 Functional and Immutable'
                 packaging 'jar'
                 // optionally artifactId can be defined here
-                description 'Simple classes to support functional programming in Java 6'
-                url 'https://github.com/acdcjunior/java6-functional-programming'
+                description 'Simple data structures to support functional and immutable programming in Java 6'
+                url 'https://github.com/acdcjunior/java6-functional-immutable'
 
                 scm {
-                    connection = 'scm:git:git@github.com:acdcjunior/java6-functional-programming.git'
-                    developerConnection = 'scm:git:git@github.com:acdcjunior/java6-functional-programming.git'
-                    url = 'git@github.com:acdcjunior/java6-functional-programming.git'
+                    connection = 'scm:git:git@github.com:acdcjunior/java6-functional-immutable.git'
+                    developerConnection = 'scm:git:git@github.com:acdcjunior/java6-functional-immutable.git'
+                    url = 'git@github.com:acdcjunior/java6-functional-immutable.git'
                 }
 
                 licenses {
                     license {
                         name 'MIT License'
-                        url 'https://github.com/acdcjunior/java6-functional-programming/blob/master/LICENSE'
+                        url 'https://github.com/acdcjunior/java6-functional-immutable/blob/master/LICENSE'
                     }
                 }
 
