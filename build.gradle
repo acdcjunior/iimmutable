@@ -5,7 +5,8 @@ plugins {
 group = 'dev.acdcjunior'
 archivesBaseName = 'java6-functional-immutable'
 version = '1.0.0'
-sourceCompatibility = 1.6
+sourceCompatibility = JavaVersion.VERSION_1_6
+targetCompatibility = JavaVersion.VERSION_1_6
 
 repositories {
 	mavenCentral()
@@ -18,10 +19,21 @@ dependencies {
 	testCompile 'org.assertj:assertj-core:1.7.1'
 }
 
-apply from: 'maven-central.gradle'
+if (project.hasProperty('ossrhUsername') && project.hasProperty('ossrhPassword')) {
+	apply from: 'maven-central.gradle'
+}
 
 gradle.projectsEvaluated {
 	tasks.withType(JavaCompile) {
-		options.compilerArgs << "-Xlint:unchecked"
+		doFirst {
+			options.compilerArgs << "-Xlint:unchecked"
+			def jdk6Home = System.env.JDK6_HOME
+			if (sourceCompatibility == '1.6' && jdk6Home != null) {
+				options.fork = true
+				//noinspection GrDeprecatedAPIUsage
+				options.bootClasspath = "$jdk6Home/jre/lib/rt.jar"
+				//options.bootClasspath += "$File.pathSeparator$System.env.JDK6_HOME/jre/lib/jsse.jar"
+			}
+		}
 	}
 }
