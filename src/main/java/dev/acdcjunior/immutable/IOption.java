@@ -100,6 +100,11 @@ public abstract class IOption<T> implements Iterable<T> {
     }
 
     @NotNull
+    public static <R> IOption<R> empty() {
+        return none();
+    }
+
+    @NotNull
     public static <R> IOption<R> ofNullable(@Nullable R value) {
         return value == null ? IOption.<R>none() : some(value);
     }

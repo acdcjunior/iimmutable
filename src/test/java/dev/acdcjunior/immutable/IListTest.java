@@ -14,6 +14,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class IListTest {
 
     @Test
+    public void empty__is_an_alias_to_none() {
+        assertThat(IOption.empty()).isSameAs(IOption.none());
+    }
+
+    @Test
     public void map() {
         IList<Character> cs = IList.listOf(Arrays.asList('a', 'b').iterator()).map(new IFunction<Character, Character>() {
             @Override
