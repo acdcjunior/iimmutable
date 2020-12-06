@@ -34,6 +34,9 @@ public abstract class IOption<T> implements Iterable<T> {
     /**
      * Throws an exception if this option is {@link None}.
      *
+     * @see IOption#orNull() If you prefer to take a <code>null</code> instead of an exception when
+     * the option is empty.
+     *
      * @return The value for this option.
      * @throws IllegalStateException if this option is {@link None}.
      */
