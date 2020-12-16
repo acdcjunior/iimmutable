@@ -99,6 +99,9 @@ public abstract class IOption<T> implements Iterable<T> {
         return (IOption<R>) None.NONE;
     }
 
+    /**
+     * @since 1.1.0
+     */
     @NotNull
     public static <R> IOption<R> empty() {
         return none();
