@@ -2,6 +2,23 @@
 
 Simple immutable classes to support functional programming in Java 6.
 
+## Dependency
+
+There are no transitive dependencies other than `org.jetbrains:annotations:13.0` (for `@NotNull` and similar annotations).
+
+Maven:
+
+    <dependency>
+        <groupId>dev.acdcjunior</groupId>
+        <artifactId>java6-functional-immutable</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+    
+Gradle:
+
+    implementation 'dev.acdcjunior:java6-functional-immutable:1.0.0'
+
+
 ## Why?
 
 I wanted a simple lib containing lists with `.map` and `.filter` methods. While there are
