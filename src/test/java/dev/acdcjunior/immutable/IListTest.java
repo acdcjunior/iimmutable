@@ -1,6 +1,7 @@
 package dev.acdcjunior.immutable;
 
 import dev.acdcjunior.immutable.fn.IFunction;
+import dev.acdcjunior.immutable.fn.IPredicate;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -12,6 +13,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class IListTest {
+
+    public static final IPredicate<String> ALL_CAPS_PREDICATE = new IPredicate<String>() {
+        @Override
+        public boolean test(String s) {
+            return s.matches("[A-Z]+");
+        }
+    };
 
     @Test
     public void empty__is_an_alias_to_none() {
@@ -28,7 +36,6 @@ public class IListTest {
         });
         assertThat(cs).containsExactly('A', 'B');
     }
-
 
     @Test
     public void concat() {
@@ -117,12 +124,27 @@ public class IListTest {
     public void first() {
         assertThat(IList.listOf("aw", "be").first().isDefined()).isEqualTo(true);
         assertThat(IList.listOf().first().isDefined()).isEqualTo(false);
+        assertThat(IList.listOf((Object) null).first().isDefined()).isEqualTo(false);
+    }
+
+    @Test
+    public void firstNullable() {
+        assertThat(IList.listOf("aw", "be").firstNullable()).isEqualTo("aw");
+        assertThat(IList.listOf().firstNullable()).isNull();
+        assertThat(IList.listOf((Object) null).firstNullable()).isNull();
     }
 
     @Test
     public void emptyList() {
         assertThat(IList.emptyList()).isEmpty();
         assertThat(IList.emptyList()).isSameAs(IList.emptyList());
+    }
+
+    @Test
+    public void find() {
+        assertThat(IList.listOf("aw", "be").find(ALL_CAPS_PREDICATE)).isEqualTo(IOption.none());
+        assertThat(IList.listOf("aw", "BE").find(ALL_CAPS_PREDICATE)).isEqualTo(IOption.some("BE"));
+        assertThat(IList.<String>listOf().find(ALL_CAPS_PREDICATE)).isEqualTo(IOption.none());
     }
 
 }

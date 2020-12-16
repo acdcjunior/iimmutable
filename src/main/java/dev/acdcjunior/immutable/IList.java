@@ -109,6 +109,17 @@ public class IList<T> implements Iterable<T> {
 
     @NotNull
     @Contract(pure = true)
+    public IOption<T> find(@NotNull IPredicate<? super T> predicate) {
+        for (T item : this) {
+            if (predicate.test(item)) {
+                return IOption.some(item);
+            }
+        }
+        return IOption.none();
+    }
+
+    @NotNull
+    @Contract(pure = true)
     public IList<T> filter(@NotNull IPredicate<? super T> predicate) {
         List<T> rs = new ArrayList<T>(this.size());
         for (T item : this) {
@@ -211,12 +222,40 @@ public class IList<T> implements Iterable<T> {
         return !this.isEmpty();
     }
 
+    /**
+     * <p>Returns an {@link IOption} containing the first element of the list, if it exists and is not <code>null</code>.
+     * If the list is empty <strong>or if the first element is <code>null</code></strong>, an {@link IOption.None} is returned.</p>
+     *
+     * <p>If the first element of your list may be <code>null</code>, use {@link #firstNullable()}.</p>
+     *
+     * @see #firstNullable()
+     *
+     * @return An {@link IOption.None} if the list is empty or the first element is <code>null</code>. Otherwise, an
+     *  {@link IOption.Some} containing the first element of the list.
+     */
+    @NotNull
     @Contract(pure = true)
     public IOption<T> first() {
         if (this.isEmpty()) {
             return IOption.none();
         }
-        return IOption.some(immutableBackingList.get(0));
+        return IOption.ofNullable(immutableBackingList.get(0));
+    }
+
+    /**
+     * Returns the first element of the list, or <code>null</code> if the list is empty.
+     *
+     * @see #first()
+     *
+     * @return <code>null</code> if the list is empty. Otherwise, returns its first element (which could be <code>null</code>).
+     */
+    @Nullable
+    @Contract(pure = true)
+    public T firstNullable() {
+        if (this.isEmpty()) {
+            return null;
+        }
+        return immutableBackingList.get(0);
     }
 
 }
