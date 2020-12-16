@@ -147,4 +147,31 @@ public class IListTest {
         assertThat(IList.<String>listOf().find(ALL_CAPS_PREDICATE)).isEqualTo(IOption.none());
     }
 
+    @Test
+    public void any() {
+        assertThat(IList.listOf("aw", "be").any(ALL_CAPS_PREDICATE)).isEqualTo(false);
+        assertThat(IList.listOf("aw", "BE").any(ALL_CAPS_PREDICATE)).isEqualTo(true);
+        assertThat(IList.<String>listOf().any(ALL_CAPS_PREDICATE)).isEqualTo(false);
+    }
+
+    @Test
+    public void none() {
+        assertThat(IList.listOf("aw", "be").none(ALL_CAPS_PREDICATE)).isEqualTo(true);
+        assertThat(IList.listOf("aw", "BE").none(ALL_CAPS_PREDICATE)).isEqualTo(false);
+        assertThat(IList.<String>listOf().none(ALL_CAPS_PREDICATE)).isEqualTo(true);
+    }
+
+    @Test
+    public void every() {
+        assertThat(IList.listOf("aw", "be").every(ALL_CAPS_PREDICATE)).isEqualTo(false);
+        assertThat(IList.listOf("aw", "BE").every(ALL_CAPS_PREDICATE)).isEqualTo(false);
+        assertThat(IList.listOf("AW", "BE").every(ALL_CAPS_PREDICATE)).isEqualTo(true);
+        assertThat(IList.<String>listOf().none(ALL_CAPS_PREDICATE)).isEqualTo(true);
+    }
+
+    @Test
+    public void all() {
+        assertThat(IList.listOf("AW", "BE").all(ALL_CAPS_PREDICATE)).isEqualTo(IList.listOf("AW", "BE").every(ALL_CAPS_PREDICATE));
+    }
+
 }

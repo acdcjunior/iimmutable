@@ -107,6 +107,11 @@ public class IList<T> implements Iterable<T> {
         return new IList<R>(rs);
     }
 
+    /**
+     * Returns the first element that matches the given predicate, or {@link IOption.None}. if no element matches it.
+     *
+     * @since 1.1.0
+     */
     @NotNull
     @Contract(pure = true)
     public IOption<T> find(@NotNull IPredicate<? super T> predicate) {
@@ -116,6 +121,48 @@ public class IList<T> implements Iterable<T> {
             }
         }
         return IOption.none();
+    }
+
+    /**
+     * Tests if any of the elements match the given predicate.
+     *
+     * @since 1.1.0
+     */
+    @Contract(pure = true)
+    public boolean any(@NotNull IPredicate<? super T> predicate) {
+        return this.find(predicate).isDefined();
+    }
+
+    /**
+     * Tests if no elements match the given predicate.
+     *
+     * @since 1.1.0
+     */
+    @Contract(pure = true)
+    public boolean none(@NotNull IPredicate<? super T> predicate) {
+        return !this.any(predicate);
+    }
+
+    /**
+     * Tests if all the elements match the given predicate.
+     *
+     * @since 1.1.0
+     */
+    @Contract(pure = true)
+    public boolean every(@NotNull IPredicate<? super T> predicate) {
+        return this.filter(predicate).size() == this.size();
+    }
+
+    /**
+     * Alias to {@link #every(IPredicate)}.
+     *
+     * @see #every(IPredicate)
+     *
+     * @since 1.1.0
+     */
+    @Contract(pure = true)
+    public boolean all(@NotNull IPredicate<? super T> predicate) {
+        return this.every(predicate);
     }
 
     @NotNull
@@ -232,6 +279,8 @@ public class IList<T> implements Iterable<T> {
      *
      * @return An {@link IOption.None} if the list is empty or the first element is <code>null</code>. Otherwise, an
      *  {@link IOption.Some} containing the first element of the list.
+     *
+     * @since 1.0.0
      */
     @NotNull
     @Contract(pure = true)
@@ -248,6 +297,8 @@ public class IList<T> implements Iterable<T> {
      * @see #first()
      *
      * @return <code>null</code> if the list is empty. Otherwise, returns its first element (which could be <code>null</code>).
+     *
+     * @since 1.1.0
      */
     @Nullable
     @Contract(pure = true)
