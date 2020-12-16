@@ -1,8 +1,8 @@
 package dev.acdcjunior.immutable.fn;
 
 
-public interface IBiConsumer<T, U> {
+public interface IBiConsumer<A, B> {
 
-    void accept(T t, U u);
+    void accept(A a, B b);
 
 }
