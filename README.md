@@ -17,7 +17,14 @@ already many around, I had some specific requirements:
 - Inclusion of more general classes such as `IPair`, `ITriple` and `IOption`.
     - Also other more particular to the functional style, such as `IEither` and the `IFunction` interface.
 - Addition of interfaces, classes and methods as needed.
+- Anonymous classes [_can_ get verbose and that is a drawback][guava-functional]. Still, it is possible to
+ profit from the functional style once it is enough a common way of reasoning in your team. In this case, the benefits
+ may be higher than the cons. Filtering `for`s, as an example, can get much in the way
+of the intent of the code. Nevertheless, Imperative foreach loops are still available (e.g. `IList` implements `Iterable`), so
+you always have the choice of falling back when the functional approach is unsuitable.
 
 Lastly, it seemed like a good exercise anyway.
 
 LICENSE: MIT
+
+[guava-functional]: https://github.com/google/guava/wiki/FunctionalExplained#Caveats
