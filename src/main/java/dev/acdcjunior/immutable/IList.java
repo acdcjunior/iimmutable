@@ -13,6 +13,8 @@ public class IList<T> implements Iterable<T> {
 
     public static final int ARRAYLIST_DEFAULT_CAPACITY = 10;
 
+    public static final int FLATMAP_MAPPER_FUNCTION_MEAN_EXPECTED_ELEMENTS = 2;
+
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static final IList EMPTY_ILIST = new IList(Collections.emptyList());
 
@@ -103,6 +105,25 @@ public class IList<T> implements Iterable<T> {
         List<R> rs = new ArrayList<R>(this.size());
         for (T item : this) {
             rs.add(mapper.apply(item));
+        }
+        return new IList<R>(rs);
+    }
+
+    /**
+     * Returns a list of all elements yielded from results of mapper function being invoked on each element of the
+     * original collection.
+     *
+     * @since 1.1.0
+     */
+    @NotNull
+    @Contract(pure = true)
+    public <R> IList<R> flatMap(@NotNull IFunction<? super T, Iterable<? extends R>> mapper) {
+        List<R> rs = new ArrayList<R>(this.size() * FLATMAP_MAPPER_FUNCTION_MEAN_EXPECTED_ELEMENTS);
+        for (T item : this) {
+            Iterable<? extends R> frs = mapper.apply(item);
+            for (R r : frs) {
+                rs.add(r);
+            }
         }
         return new IList<R>(rs);
     }

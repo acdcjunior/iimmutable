@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import static dev.acdcjunior.immutable.Wrapper.w;
+import static dev.acdcjunior.immutable.WrapperChild.wc;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -18,6 +20,13 @@ public class IListTest {
         @Override
         public boolean test(String s) {
             return s.matches("[A-Z]+");
+        }
+    };
+
+    public static final IFunction<Object, String> TO_STRING_MAPPER = new IFunction<Object, String>() {
+        @Override
+        public String apply(Object input) {
+            return input.toString();
         }
     };
 
@@ -35,6 +44,17 @@ public class IListTest {
             }
         });
         assertThat(cs).containsExactly('A', 'B');
+    }
+
+    @Test
+    public void flatMap() {
+        IList<Wrapper> ss = IList.listOf(w("a"), w("b")).flatMap(new IFunction<Wrapper, Iterable<? extends Wrapper>>() {
+            @Override
+            public Iterable<? extends Wrapper> apply(Wrapper input) {
+                return IList.listOf(wc(input.w.toUpperCase()), wc(input.w + input.w.toUpperCase()));
+            }
+        });
+        assertThat(ss.map(TO_STRING_MAPPER)).containsExactly("wc:W:A", "wc:w:aW:A", "wc:W:B", "wc:w:bW:B");
     }
 
     @Test
@@ -174,4 +194,18 @@ public class IListTest {
         assertThat(IList.listOf("AW", "BE").all(ALL_CAPS_PREDICATE)).isEqualTo(IList.listOf("AW", "BE").every(ALL_CAPS_PREDICATE));
     }
 
+}
+
+class Wrapper {
+    static Wrapper w(String w) { return new Wrapper(w); }
+    final String w;
+    Wrapper(String w) { this.w = "w:" + w; }
+    @Override public String toString() { return w; }
+}
+@SuppressWarnings("unused")
+class WrapperChild extends Wrapper {
+    static WrapperChild wc(String wc) { return new WrapperChild(wc); }
+    final String wc;
+    WrapperChild(String wc) { super("child:" + wc); this.wc = "wc:" + wc; }
+    @Override public String toString() { return wc; }
 }
