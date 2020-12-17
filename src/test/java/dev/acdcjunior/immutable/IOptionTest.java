@@ -94,7 +94,7 @@ public class IOptionTest {
             IOption.none().get();
             fail("Should have thrown exception");
         } catch (Exception e) {
-            assertThat(e).hasMessage("IOption.None has no value");
+            assertThat(e).hasMessage("IOption.None has no value. If null would be an acceptable value in this case, use .orNull() instead of .get()");
         }
     }
 

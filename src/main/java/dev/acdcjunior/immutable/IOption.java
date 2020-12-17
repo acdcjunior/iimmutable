@@ -286,7 +286,7 @@ public abstract class IOption<T> implements Iterable<T> {
         @NotNull
         @Override
         public T get() {
-            throw new IllegalStateException("IOption.None has no value. If null would be an acceptable value in this case, use .orNull() instead of .get().");
+            throw new IllegalStateException("IOption.None has no value. If null would be an acceptable value in this case, use .orNull() instead of .get()");
         }
 
         @Override
