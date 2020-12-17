@@ -4,7 +4,7 @@ plugins {
 
 group = 'dev.acdcjunior'
 archivesBaseName = 'java6-functional-immutable'
-version = '1.0.0'
+version = '1.1.0-SNAPSHOT'
 sourceCompatibility = JavaVersion.VERSION_1_6
 targetCompatibility = JavaVersion.VERSION_1_6
 
