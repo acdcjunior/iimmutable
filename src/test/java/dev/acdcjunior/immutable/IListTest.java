@@ -225,6 +225,11 @@ public class IListTest {
         }, 1)).isEqualTo(1010101);
     }
 
+    @Test
+    public void toArray() {
+        assertThat(IList.listOf("a", "b", "c").toArray(new String[0])).isEqualTo(new String[] { "a", "b", "c"});
+    }
+
 }
 
 class Wrapper {

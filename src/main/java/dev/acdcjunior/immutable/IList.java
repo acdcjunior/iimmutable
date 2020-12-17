@@ -349,6 +349,15 @@ public class IList<T> implements Iterable<T> {
         return IOption.some(accumulator);
     }
 
+    /**
+     * Returns an array containing the elements of the list.
+     *
+     * @since 1.1.0
+     */
+    public T[] toArray(T[] a) {
+        return immutableBackingList.toArray(a);
+    }
+
     interface Reducer<T, R> {
         R reduce(R accumulator, T next);
     }
