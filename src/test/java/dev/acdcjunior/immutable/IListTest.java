@@ -1,5 +1,6 @@
 package dev.acdcjunior.immutable;
 
+import dev.acdcjunior.immutable.fn.IBiFunction;
 import dev.acdcjunior.immutable.fn.IFunction;
 import dev.acdcjunior.immutable.fn.IPredicate;
 import org.jetbrains.annotations.NotNull;
@@ -192,6 +193,36 @@ public class IListTest {
     @Test
     public void all() {
         assertThat(IList.listOf("AW", "BE").all(ALL_CAPS_PREDICATE)).isEqualTo(IList.listOf("AW", "BE").every(ALL_CAPS_PREDICATE));
+    }
+
+    @Test
+    public void reduce__noInitialValue____empty_list() {
+        assertThat(IList.<Wrapper>listOf().reduce(new IBiFunction<Wrapper, Wrapper, Wrapper>() {
+            @Override
+            public Wrapper apply(Wrapper wrapper, Wrapper wrapper2) {
+                return null;
+            }
+        })).isEqualTo(IOption.none());
+    }
+
+    @Test
+    public void reduce__noInitialValue() {
+        assertThat(IList.listOf(w("a"), w("b"), w("c")).reduce(new IBiFunction<Wrapper, Wrapper, Wrapper>() {
+            @Override
+            public Wrapper apply(Wrapper w1, Wrapper w2) {
+                return w(w1.w + "/" + w2.w);
+            }
+        }).get().w).isEqualTo("w:w:w:a/w:b/w:c");
+    }
+
+    @Test
+    public void reduce() {
+        assertThat(IList.listOf(w("100"), w("10000"), w("1000000")).reduce(new IList.Reducer<Wrapper, Integer>() {
+            @Override
+            public Integer reduce(Integer accumulator, Wrapper next) {
+                return accumulator + Integer.parseInt(next.w.split(":")[1]);
+            }
+        }, 1)).isEqualTo(1010101);
     }
 
 }

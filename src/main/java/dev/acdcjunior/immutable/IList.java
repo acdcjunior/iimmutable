@@ -1,5 +1,6 @@
 package dev.acdcjunior.immutable;
 
+import dev.acdcjunior.immutable.fn.IBiFunction;
 import dev.acdcjunior.immutable.fn.IFunction;
 import dev.acdcjunior.immutable.fn.IPredicate;
 import org.jetbrains.annotations.Contract;
@@ -328,6 +329,45 @@ public class IList<T> implements Iterable<T> {
             return null;
         }
         return immutableBackingList.get(0);
+    }
+
+    /**
+     * Returns a list of all elements yielded from results of mapper function being invoked on each element of the
+     * original collection.
+     *
+     * @since 1.1.0
+     */
+    @NotNull
+    @Contract(pure = true)
+    public <R extends T> IOption<T> reduce(@NotNull IBiFunction<T, T, R> reducer) {
+        Iterator<T> iterator = this.iterator();
+        if (!iterator.hasNext()) return IOption.none();
+        T accumulator = iterator.next();
+        while (iterator.hasNext()) {
+            accumulator = reducer.apply(accumulator, iterator.next());
+        }
+        return IOption.some(accumulator);
+    }
+
+    interface Reducer<T, R> {
+        R reduce(R accumulator, T next);
+    }
+
+    /**
+     * Returns a list of all elements yielded from results of mapper function being invoked on each element of the
+     * original collection, accumulating to a value that starts with {@code initialValue}.
+     *
+     * @since 1.1.0
+     */
+    @NotNull
+    @Contract(pure = true)
+    public <R> R reduce(@NotNull Reducer<T, R> reducer, R initialValue) {
+        Iterator<T> iterator = this.iterator();
+        R accumulator = initialValue;
+        while (iterator.hasNext()) {
+            accumulator = reducer.reduce(accumulator, iterator.next());
+        }
+        return accumulator;
     }
 
 }
