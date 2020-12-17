@@ -39,9 +39,11 @@ already many around, I had some specific requirements:
  may be higher than the cons. Filtering `for`s, as an example, can get much in the way
 of the intent of the code. Nevertheless, Imperative foreach loops are still available (e.g. `IList` implements `Iterable`), so
 you always have the choice of falling back when the functional approach is unsuitable.
+- This is a great companion to [retrolambda][retrolambda]. This also overcomes the problem of the anonymous classes.
 
 Lastly, it seemed like a good exercise anyway.
 
 LICENSE: MIT
 
 [guava-functional]: https://github.com/google/guava/wiki/FunctionalExplained#Caveats
+[retrolambda]: https://github.com/luontola/retrolambda
