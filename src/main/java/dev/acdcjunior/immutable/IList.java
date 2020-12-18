@@ -1,6 +1,7 @@
 package dev.acdcjunior.immutable;
 
 import dev.acdcjunior.immutable.fn.IBiFunction;
+import dev.acdcjunior.immutable.fn.IConsumer;
 import dev.acdcjunior.immutable.fn.IFunction;
 import dev.acdcjunior.immutable.fn.IPredicate;
 import org.jetbrains.annotations.Contract;
@@ -10,11 +11,20 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 
+/**
+ * An immutable list.
+ *
+ * @param <T> The type of the elements.
+ *
+ * @since 1.0.0
+ */
 public class IList<T> implements Iterable<T> {
 
     public static final int ARRAYLIST_DEFAULT_CAPACITY = 10;
 
     public static final int FLATMAP_MAPPER_FUNCTION_MEAN_EXPECTED_ELEMENTS = 2;
+
+    public static final int JOIN_FUNCTION_MEAN_EXPECTED_ELEMENTS_STRING_SIZE = 5;
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static final IList EMPTY_ILIST = new IList(Collections.emptyList());
@@ -377,6 +387,78 @@ public class IList<T> implements Iterable<T> {
             accumulator = reducer.reduce(accumulator, iterator.next());
         }
         return accumulator;
+    }
+
+    /**
+     * @since 1.1.0
+     */
+    @NotNull
+    public String join(String separator) {
+        StringBuilder sb = new StringBuilder(immutableBackingList.size() * JOIN_FUNCTION_MEAN_EXPECTED_ELEMENTS_STRING_SIZE);
+        for (int i = 0, backingListSize = immutableBackingList.size(); i < backingListSize; i++) {
+            sb.append(immutableBackingList.get(i));
+            if (i < backingListSize - 1) {
+                sb.append(separator);
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * @since 1.1.0
+     */
+    @NotNull
+    public String join() {
+        return this.join("");
+    }
+
+    /**
+     * @since 1.1.0
+     */
+    @NotNull
+    public <K> Map<K, T> associateBy(IFunction<T, K> keySelector) {
+        Map<K, T> map = new HashMap<K, T>(immutableBackingList.size());
+        for (T el : immutableBackingList) {
+            map.put(keySelector.apply(el), el);
+        }
+        return map;
+    }
+
+    /**
+     * @since 1.1.0
+     */
+    @NotNull
+    public IList<T> peek(@NotNull IConsumer<? super T> consumer) {
+        for (T item : this) {
+            consumer.accept(item);
+        }
+        return this;
+    }
+
+    /**
+     * @since 1.1.0
+     */
+    public void forEach(@NotNull IConsumer<? super T> consumer) {
+        for (T item : this) {
+            consumer.accept(item);
+        }
+    }
+
+    /**
+     * Returns the element at the specified position in this list.
+     *
+     * @param index index of the element to return
+     * @return the element at the specified position in this list
+     * @throws IndexOutOfBoundsException if the index is out of range
+     *         (<tt>index &lt; 0 || index &gt;= size()</tt>)
+     *
+     * @since 1.1.0
+     */
+    public T get(int index) {
+        if (index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException("Index has to be greater than zero and less than size(). Index: " + index + " Size: " + size());
+        }
+        return immutableBackingList.get(index);
     }
 
 }

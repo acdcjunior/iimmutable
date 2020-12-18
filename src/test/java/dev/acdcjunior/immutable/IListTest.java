@@ -230,6 +230,50 @@ public class IListTest {
         assertThat(IList.listOf("a", "b", "c").toArray(new String[0])).isEqualTo(new String[] { "a", "b", "c"});
     }
 
+    @Test
+    public void join_separator() {
+        assertThat(IList.listOf("a", "b", "c").join("!")).isEqualTo("a!b!c");
+        assertThat(IList.listOf().join("!")).isEqualTo("");
+    }
+
+    @Test
+    public void join_noArg() {
+        assertThat(IList.listOf("a", "b", "c").join()).isEqualTo("abc");
+        assertThat(IList.listOf().join()).isEqualTo("");
+    }
+
+    @Test
+    public void associateBy() {
+        // TODO
+    }
+
+    @Test
+    public void peek() {
+        // TODO
+    }
+
+    @Test
+    public void forEach() {
+        // TODO
+    }
+
+    @Test
+    public void get() {
+        IList<String> ss = IList.listOf("a", "b", "c");
+        assertThat(ss.get(0)).isEqualTo("a");
+        assertThat(ss.get(2)).isEqualTo("c");
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void get__negative_index() {
+        IList.listOf("a").get(-1);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void get__index_greater_than_size() {
+        IList.listOf("a", "b", "c").get(9);
+    }
+
 }
 
 class Wrapper {
