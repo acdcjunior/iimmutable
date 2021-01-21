@@ -39,11 +39,19 @@ public class IPair<A, B> {
         return a;
     }
 
+    public A left() {
+        return a;
+    }
+
     public B getB() {
         return b;
     }
 
     public B getRight() {
+        return b;
+    }
+
+    public B right() {
         return b;
     }
 

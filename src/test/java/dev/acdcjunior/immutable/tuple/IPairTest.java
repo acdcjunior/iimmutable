@@ -27,12 +27,14 @@ public class IPairTest {
     }
 
     @Test
-    public void getLeft_getRight_getA_getB() {
+    public void getLeft_getRight_getA_getB_left_right() {
         IPair<Integer, Integer> p = IPair.pairOf(123, 456);
         assertThat(p.getLeft()).isEqualTo(123);
         assertThat(p.getA()).isEqualTo(123);
+        assertThat(p.left()).isEqualTo(123);
         assertThat(p.getRight()).isEqualTo(456);
         assertThat(p.getB()).isEqualTo(456);
+        assertThat(p.right()).isEqualTo(456);
     }
 
 }
