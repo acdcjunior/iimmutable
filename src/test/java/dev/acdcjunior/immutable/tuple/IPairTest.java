@@ -26,4 +26,13 @@ public class IPairTest {
         assertThat(IPair.pairOf(123, "456").toString()).isEqualTo("(123, 456)");
     }
 
+    @Test
+    public void getLeft_getRight_getA_getB() {
+        IPair<Integer, Integer> p = IPair.pairOf(123, 456);
+        assertThat(p.getLeft()).isEqualTo(123);
+        assertThat(p.getA()).isEqualTo(123);
+        assertThat(p.getRight()).isEqualTo(456);
+        assertThat(p.getB()).isEqualTo(456);
+    }
+
 }

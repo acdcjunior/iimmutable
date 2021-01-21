@@ -35,7 +35,15 @@ public class IPair<A, B> {
         return a;
     }
 
+    public A getLeft() {
+        return a;
+    }
+
     public B getB() {
+        return b;
+    }
+
+    public B getRight() {
         return b;
     }
 
