@@ -39,4 +39,9 @@ public class IPair<A, B> {
         return b;
     }
 
+    @Override
+    public String toString() {
+        return "(" + a + ", " + b + ')';
+    }
+
 }

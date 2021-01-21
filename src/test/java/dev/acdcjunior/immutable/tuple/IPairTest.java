@@ -21,4 +21,9 @@ public class IPairTest {
         assertThat(IPair.pairOf(123, 456).equals(IPair.pairOf(456, 123))).isFalse();
     }
 
+    @Test
+    public void __toString() {
+        assertThat(IPair.pairOf(123, "456").toString()).isEqualTo("(123, 456)");
+    }
+
 }
