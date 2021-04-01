@@ -380,6 +380,31 @@ public class IList<T> implements Iterable<T> {
      */
     @NotNull @Contract(pure = true) public IList<T> subtract(T... c) { return subtractVarags(c); }
 
+    /**
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> minus(T t1) { return subtractVarags(t1); }
+    /**
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> minus(T t1, T t2) { return subtractVarags(t1, t2); }
+    /**
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> minus(T t1, T t2, T t3) { return subtractVarags(t1, t2, t3); }
+    /**
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> minus(T t1, T t2, T t3, T t4) { return subtractVarags(t1, t2, t3, t4); }
+    /**
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> minus(T t1, T t2, T t3, T t4, T t5) { return subtractVarags(t1, t2, t3, t4, t5); }
+    /**
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) public IList<T> minus(T... c) { return subtractVarags(c); }
+
     private IList<T> plusVarargs(@NotNull Iterable<? extends T>... others) {
         return concat(others);
     }
@@ -408,6 +433,31 @@ public class IList<T> implements Iterable<T> {
      * @since 1.0.0
      */
     @NotNull @Contract(pure = true) public IList<T> plus(@NotNull Iterable<? extends T>... others) { return plusVarargs(others); }
+
+    /**
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> add(@NotNull Iterable<? extends T> it1) { return plusVarargs(it1); }
+    /**
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> add(@NotNull Iterable<? extends T> it1, @NotNull Iterable<? extends T> it2) { return plusVarargs(it1, it2); }
+    /**
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> add(@NotNull Iterable<? extends T> it1, @NotNull Iterable<? extends T> it2, @NotNull Iterable<? extends T> it3) { return plusVarargs(it1, it2, it3); }
+    /**
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> add(@NotNull Iterable<? extends T> it1, @NotNull Iterable<? extends T> it2, @NotNull Iterable<? extends T> it3, @NotNull Iterable<? extends T> it4) { return plusVarargs(it1, it2, it3, it4); }
+    /**
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> add(@NotNull Iterable<? extends T> it1, @NotNull Iterable<? extends T> it2, @NotNull Iterable<? extends T> it3, @NotNull Iterable<? extends T> it4, @NotNull Iterable<? extends T> it5) { return plusVarargs(it1, it2, it3, it4, it5); }
+    /**
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) public IList<T> add(@NotNull Iterable<? extends T>... others) { return plusVarargs(others); }
 
     @SuppressWarnings("unchecked")
     private IList<T> plusVarargs(T... c) {
@@ -445,6 +495,40 @@ public class IList<T> implements Iterable<T> {
      */
     @NotNull @Contract(pure = true) public IList<T> plus(T... c) { return plusVarargs(c); }
 
+    /**
+     * Creates a new list containing all current elements plus the added one. Same as {@link #plus(Object)}.
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> add(T t1) { return plusVarargs(t1); }
+    /**
+     * Creates a new list containing all current elements plus the added ones. Same as {@link #plus(Object, Object)}.
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> add(T t1, T t2) { return plusVarargs(t1, t2); }
+    /**
+     * Creates a new list containing all current elements plus the added ones. Same as {@link #plus(Object, Object, Object)}.
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> add(T t1, T t2, T t3) { return plusVarargs(t1, t2, t3); }
+    /**
+     * Creates a new list containing all current elements plus the added ones. Same as {@link #plus(Object, Object, Object, Object)}.
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> add(T t1, T t2, T t3, T t4) { return plusVarargs(t1, t2, t3, t4); }
+    /**
+     * Creates a new list containing all current elements plus the added ones. Same as {@link #plus(Object, Object, Object, Object, Object)}.
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> add(T t1, T t2, T t3, T t4, T t5) { return plusVarargs(t1, t2, t3, t4, t5); }
+    /**
+     * Creates a new list containing all current elements plus the added ones. Same as {@link #plus(Object[])}.
+     * @since 2.0.0
+     */
+    @NotNull @Contract(pure = true) public IList<T> add(T... c) { return plusVarargs(c); }
+
+    /**
+     * @since 1.0.0
+     */
     @Contract(pure = true)
     public boolean isEmpty() {
         return this.size() == 0;

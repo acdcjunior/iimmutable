@@ -95,11 +95,19 @@ public class IList_methodsWithVarargs_Test {
         /* 3 */ verifyIListAsIntsIsEqualTo(iListOfTen(r).subtract(r.e(10), r.e(9), r.e(8)), 7);
         /* 4 */ verifyIListAsIntsIsEqualTo(iListOfTen(r).subtract(r.e(10), r.e(9), r.e(8), r.e(7)), 6);
         /* 5 */ verifyIListAsIntsIsEqualTo(iListOfTen(r).subtract(r.e(10), r.e(9), r.e(8), r.e(7), r.e(6)), 5);
+
+        /* 1 */ verifyIListAsIntsIsEqualTo(iListOfTen(r).minus(r.e(10)), 9);
+        /* 2 */ verifyIListAsIntsIsEqualTo(iListOfTen(r).minus(r.e(10), r.e(9)), 8);
+        /* 3 */ verifyIListAsIntsIsEqualTo(iListOfTen(r).minus(r.e(10), r.e(9), r.e(8)), 7);
+        /* 4 */ verifyIListAsIntsIsEqualTo(iListOfTen(r).minus(r.e(10), r.e(9), r.e(8), r.e(7)), 6);
+        /* 5 */ verifyIListAsIntsIsEqualTo(iListOfTen(r).minus(r.e(10), r.e(9), r.e(8), r.e(7), r.e(6)), 5);
     }
 
     @SuppressWarnings("unchecked")
     private static <R extends N<R>> void subtractCheckWarningsSixPlus(R r) {
         /* 6+ */ verifyIListAsIntsIsEqualTo(iListOfTen(r).subtract(r.e(10), r.e(9), r.e(8), r.e(7), r.e(6), r.e(5)), 4);
+
+        /* 6+ */ verifyIListAsIntsIsEqualTo(iListOfTen(r).minus(r.e(10), r.e(9), r.e(8), r.e(7), r.e(6), r.e(5)), 4);
     }
 
     @Test
@@ -115,11 +123,18 @@ public class IList_methodsWithVarargs_Test {
         /* 3 */ verifyIListAsIntsIsEqualTo(iListOfOne(r).plus(r.e(2), r.e(3), r.e(4)), 4);
         /* 4 */ verifyIListAsIntsIsEqualTo(iListOfOne(r).plus(r.e(2), r.e(3), r.e(4), r.e(5)), 5);
         /* 5 */ verifyIListAsIntsIsEqualTo(iListOfOne(r).plus(r.e(2), r.e(3), r.e(4), r.e(5), r.e(6)), 6);
+
+        /* 1 */ verifyIListAsIntsIsEqualTo(iListOfOne(r).add(r.e(2)), 2);
+        /* 2 */ verifyIListAsIntsIsEqualTo(iListOfOne(r).add(r.e(2), r.e(3)), 3);
+        /* 3 */ verifyIListAsIntsIsEqualTo(iListOfOne(r).add(r.e(2), r.e(3), r.e(4)), 4);
+        /* 4 */ verifyIListAsIntsIsEqualTo(iListOfOne(r).add(r.e(2), r.e(3), r.e(4), r.e(5)), 5);
+        /* 5 */ verifyIListAsIntsIsEqualTo(iListOfOne(r).add(r.e(2), r.e(3), r.e(4), r.e(5), r.e(6)), 6);
     }
 
     @SuppressWarnings("unchecked")
     private static <R extends N<R>> void plusCheckWarningsSixPlus(R r) {
         /* 6+ */ verifyIListAsIntsIsEqualTo(iListOfOne(r).plus(r.e(2), r.e(3), r.e(4), r.e(5), r.e(6), r.e(7)), 7);
+        /* 6+ */ verifyIListAsIntsIsEqualTo(iListOfOne(r).add(r.e(2), r.e(3), r.e(4), r.e(5), r.e(6), r.e(7)), 7);
     }
 
     @Test
@@ -135,11 +150,18 @@ public class IList_methodsWithVarargs_Test {
         /* 3 */ verifyIListAsIntsIsEqualTo(iListOfOne(r).plus(r.i(2), r.i(3), r.i(4)), 4);
         /* 4 */ verifyIListAsIntsIsEqualTo(iListOfOne(r).plus(r.i(2), r.i(3), r.i(4), r.i(5)), 5);
         /* 5 */ verifyIListAsIntsIsEqualTo(iListOfOne(r).plus(r.i(2), r.i(3), r.i(4), r.i(5), r.i(6)), 6);
+
+        /* 1 */ verifyIListAsIntsIsEqualTo(iListOfOne(r).add(r.i(2)), 2);
+        /* 2 */ verifyIListAsIntsIsEqualTo(iListOfOne(r).add(r.i(2), r.i(3)), 3);
+        /* 3 */ verifyIListAsIntsIsEqualTo(iListOfOne(r).add(r.i(2), r.i(3), r.i(4)), 4);
+        /* 4 */ verifyIListAsIntsIsEqualTo(iListOfOne(r).add(r.i(2), r.i(3), r.i(4), r.i(5)), 5);
+        /* 5 */ verifyIListAsIntsIsEqualTo(iListOfOne(r).add(r.i(2), r.i(3), r.i(4), r.i(5), r.i(6)), 6);
     }
 
     @SuppressWarnings("unchecked")
     private static <R extends N<R>> void plusIterableCheckWarningsSixPlus(R r) {
         /* 6+ */ verifyIListAsIntsIsEqualTo(iListOfOne(r).plus(r.i(2), r.i(3), r.i(4), r.i(5), r.i(6), r.i(7)), 7);
+        /* 6+ */ verifyIListAsIntsIsEqualTo(iListOfOne(r).add(r.i(2), r.i(3), r.i(4), r.i(5), r.i(6), r.i(7)), 7);
     }
 
     @Test
