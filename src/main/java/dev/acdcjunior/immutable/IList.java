@@ -29,6 +29,9 @@ public class IList<T> implements Iterable<T> {
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static final IList EMPTY_ILIST = new IList(Collections.emptyList());
 
+    /**
+     * @since 1.0.0
+     */
     @NotNull
     @Contract(pure = true)
     public static <T> IList<T> listOf(@Nullable Iterator<T> iterator) {
@@ -38,6 +41,9 @@ public class IList<T> implements Iterable<T> {
         return new IList<T>(IListUtils.toArrayList(iterator));
     }
 
+    /**
+     * @since 1.0.0
+     */
     @NotNull
     @Contract(pure = true)
     public static <T> IList<T> listOf(@Nullable Iterable<T> iterable) {
@@ -51,18 +57,54 @@ public class IList<T> implements Iterable<T> {
         return new IList<T>(new ArrayList<T>(Arrays.asList(items)));
     }
 
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1) { return listOfVarags(t1); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2) { return listOfVarags(t1, t2); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3) { return listOfVarags(t1, t2, t3); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4) { return listOfVarags(t1, t2, t3, t4); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5) { return listOfVarags(t1, t2, t3, t4, t5); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5, T t6) { return listOfVarags(t1, t2, t3, t4, t5, t6); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5, T t6, T t7) { return listOfVarags(t1, t2, t3, t4, t5, t6, t7); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8) { return listOfVarags(t1, t2, t3, t4, t5, t6, t7, t8); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8, T t9) { return listOfVarags(t1, t2, t3, t4, t5, t6, t7, t8, t9); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8, T t9, T t10) { return listOfVarags(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) public static <T> IList<T> listOf(@Nullable T... items) { return listOfVarags(items); }
 
+    /**
+     * @since 1.0.0
+     */
     @SuppressWarnings("unchecked")
     public static <T> IList<T> emptyList() {
         return (IList<T>) EMPTY_ILIST;
@@ -75,6 +117,9 @@ public class IList<T> implements Iterable<T> {
         this.immutableBackingList = immutableBackingList;
     }
 
+    /**
+     * @since 1.0.0
+     */
     @Override
     public boolean equals(Object o) {
         if (o instanceof IList) {
@@ -83,33 +128,51 @@ public class IList<T> implements Iterable<T> {
         return immutableBackingList.equals(o);
     }
 
+    /**
+     * @since 1.0.0
+     */
     @Override
     public int hashCode() {
         return immutableBackingList.hashCode();
     }
 
+    /**
+     * @since 1.0.0
+     */
     @Override
     public String toString() {
         return immutableBackingList.toString();
     }
 
+    /**
+     * @since 1.0.0
+     */
     @NotNull
     @Contract(pure = true)
     public List<T> toList() {
         return immutableBackingList;
     }
 
+    /**
+     * @since 1.0.0
+     */
     @NotNull
     @Override
     public Iterator<T> iterator() {
         return immutableBackingList.iterator();
     }
 
+    /**
+     * @since 1.0.0
+     */
     @Contract(pure = true)
     public int size() {
         return immutableBackingList.size();
     }
 
+    /**
+     * @since 1.0.0
+     */
     @NotNull
     @Contract(pure = true)
     public <R> IList<R> map(@NotNull IFunction<? super T, ? extends R> mapper) {
@@ -124,7 +187,7 @@ public class IList<T> implements Iterable<T> {
      * Returns a list of all elements yielded from results of mapper function being invoked on each element of the
      * original collection.
      *
-     * @since 1.1.0
+     * @since 2.0.0
      */
     @NotNull
     @Contract(pure = true)
@@ -142,7 +205,7 @@ public class IList<T> implements Iterable<T> {
     /**
      * Returns the first element that matches the given predicate, or {@link IOption.None}. if no element matches it.
      *
-     * @since 1.1.0
+     * @since 2.0.0
      */
     @NotNull
     @Contract(pure = true)
@@ -158,7 +221,7 @@ public class IList<T> implements Iterable<T> {
     /**
      * Tests if any of the elements match the given predicate.
      *
-     * @since 1.1.0
+     * @since 2.0.0
      */
     @Contract(pure = true)
     public boolean any(@NotNull IPredicate<? super T> predicate) {
@@ -168,7 +231,7 @@ public class IList<T> implements Iterable<T> {
     /**
      * Tests if no elements match the given predicate.
      *
-     * @since 1.1.0
+     * @since 2.0.0
      */
     @Contract(pure = true)
     public boolean none(@NotNull IPredicate<? super T> predicate) {
@@ -178,7 +241,7 @@ public class IList<T> implements Iterable<T> {
     /**
      * Tests if all the elements match the given predicate.
      *
-     * @since 1.1.0
+     * @since 2.0.0
      */
     @Contract(pure = true)
     public boolean every(@NotNull IPredicate<? super T> predicate) {
@@ -190,13 +253,16 @@ public class IList<T> implements Iterable<T> {
      *
      * @see #every(IPredicate)
      *
-     * @since 1.1.0
+     * @since 2.0.0
      */
     @Contract(pure = true)
     public boolean all(@NotNull IPredicate<? super T> predicate) {
         return this.every(predicate);
     }
 
+    /**
+     * @since 1.0.0
+     */
     @NotNull
     @Contract(pure = true)
     public IList<T> filter(@NotNull IPredicate<? super T> predicate) {
@@ -220,13 +286,34 @@ public class IList<T> implements Iterable<T> {
         return new IList<T>(ls);
     }
 
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public final IList<T> concat(Iterable<? extends T> it1) { return concatVarargs(it1); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public final IList<T> concat(Iterable<? extends T> it1, Iterable<? extends T> it2) { return concatVarargs(it1, it2); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public final IList<T> concat(Iterable<? extends T> it1, Iterable<? extends T> it2, Iterable<? extends T> it3) { return concatVarargs(it1, it2, it3); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public final IList<T> concat(Iterable<? extends T> it1, Iterable<? extends T> it2, Iterable<? extends T> it3, Iterable<? extends T> it4) { return concatVarargs(it1, it2, it3, it4); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public final IList<T> concat(Iterable<? extends T> it1, Iterable<? extends T> it2, Iterable<? extends T> it3, Iterable<? extends T> it4, Iterable<? extends T> it5) { return concatVarargs(it1, it2, it3, it4, it5); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) public final IList<T> concat(Iterable<? extends T>... iterables) { return concatVarargs(iterables); }
 
+    /**
+     * @since 1.0.0
+     */
     @NotNull
     @Contract(pure = true)
     public IList<T> filterNonNull() {
@@ -238,13 +325,20 @@ public class IList<T> implements Iterable<T> {
         });
     }
 
-    // https://stackoverflow.com/a/15603260/1850609
+    /**
+     * Creates a new list containing all current elements minus the duplicates.
+     * See: https://stackoverflow.com/a/15603260/1850609
+     * @since 1.0.0
+     */
     @NotNull
     @Contract(pure = true)
     public IList<T> distinct() {
         return listOf(new LinkedHashSet<T>(immutableBackingList).iterator());
     }
 
+    /**
+     * @since 1.0.0
+     */
     @NotNull
     @Contract(pure = true)
     public IList<T> subtract(@NotNull Iterable<T> other) {
@@ -261,22 +355,58 @@ public class IList<T> implements Iterable<T> {
         return subtract(listOf(c));
     }
 
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> subtract(T t1) { return subtractVarags(t1); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> subtract(T t1, T t2) { return subtractVarags(t1, t2); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> subtract(T t1, T t2, T t3) { return subtractVarags(t1, t2, t3); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> subtract(T t1, T t2, T t3, T t4) { return subtractVarags(t1, t2, t3, t4); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> subtract(T t1, T t2, T t3, T t4, T t5) { return subtractVarags(t1, t2, t3, t4, t5); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) public IList<T> subtract(T... c) { return subtractVarags(c); }
 
     private IList<T> plusVarargs(@NotNull Iterable<? extends T>... others) {
         return concat(others);
     }
 
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(@NotNull Iterable<? extends T> it1) { return plusVarargs(it1); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(@NotNull Iterable<? extends T> it1, @NotNull Iterable<? extends T> it2) { return plusVarargs(it1, it2); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(@NotNull Iterable<? extends T> it1, @NotNull Iterable<? extends T> it2, @NotNull Iterable<? extends T> it3) { return plusVarargs(it1, it2, it3); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(@NotNull Iterable<? extends T> it1, @NotNull Iterable<? extends T> it2, @NotNull Iterable<? extends T> it3, @NotNull Iterable<? extends T> it4) { return plusVarargs(it1, it2, it3, it4); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(@NotNull Iterable<? extends T> it1, @NotNull Iterable<? extends T> it2, @NotNull Iterable<? extends T> it3, @NotNull Iterable<? extends T> it4, @NotNull Iterable<? extends T> it5) { return plusVarargs(it1, it2, it3, it4, it5); }
+    /**
+     * @since 1.0.0
+     */
     @NotNull @Contract(pure = true) public IList<T> plus(@NotNull Iterable<? extends T>... others) { return plusVarargs(others); }
 
     @SuppressWarnings("unchecked")
@@ -284,11 +414,35 @@ public class IList<T> implements Iterable<T> {
         return plusVarargs(listOf(c));
     }
 
+    /**
+     * Creates a new list containing all current elements plus the added one. Same as {@link #add(Object)}.
+     * @since 2.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(T t1) { return plusVarargs(t1); }
+    /**
+     * Creates a new list containing all current elements plus the added ones. Same as {@link #add(Object, Object)}.
+     * @since 2.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(T t1, T t2) { return plusVarargs(t1, t2); }
+    /**
+     * Creates a new list containing all current elements plus the added ones. Same as {@link #add(Object, Object, Object)}.
+     * @since 2.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(T t1, T t2, T t3) { return plusVarargs(t1, t2, t3); }
+    /**
+     * Creates a new list containing all current elements plus the added ones. Same as {@link #add(Object, Object, Object, Object)}.
+     * @since 2.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(T t1, T t2, T t3, T t4) { return plusVarargs(t1, t2, t3, t4); }
+    /**
+     * Creates a new list containing all current elements plus the added ones. Same as {@link #add(Object, Object, Object, Object, Object)}.
+     * @since 2.0.0
+     */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public IList<T> plus(T t1, T t2, T t3, T t4, T t5) { return plusVarargs(t1, t2, t3, t4, t5); }
+    /**
+     * Creates a new list containing all current elements plus the added ones. Same as {@link #add(Object[])}.
+     * @since 2.0.0
+     */
     @NotNull @Contract(pure = true) public IList<T> plus(T... c) { return plusVarargs(c); }
 
     @Contract(pure = true)
@@ -296,6 +450,9 @@ public class IList<T> implements Iterable<T> {
         return this.size() == 0;
     }
 
+    /**
+     * @since 1.0.0
+     */
     @Contract(pure = true)
     public boolean isNotEmpty() {
         return !this.isEmpty();
@@ -330,7 +487,7 @@ public class IList<T> implements Iterable<T> {
      *
      * @return <code>null</code> if the list is empty. Otherwise, returns its first element (which could be <code>null</code>).
      *
-     * @since 1.1.0
+     * @since 2.0.0
      */
     @Nullable
     @Contract(pure = true)
@@ -345,7 +502,7 @@ public class IList<T> implements Iterable<T> {
      * Returns a list of all elements yielded from results of mapper function being invoked on each element of the
      * original collection.
      *
-     * @since 1.1.0
+     * @since 2.0.0
      */
     @NotNull
     @Contract(pure = true)
@@ -362,7 +519,7 @@ public class IList<T> implements Iterable<T> {
     /**
      * Returns an array containing the elements of the list.
      *
-     * @since 1.1.0
+     * @since 2.0.0
      */
     public T[] toArray(T[] a) {
         return immutableBackingList.toArray(a);
@@ -376,7 +533,7 @@ public class IList<T> implements Iterable<T> {
      * Returns a list of all elements yielded from results of mapper function being invoked on each element of the
      * original collection, accumulating to a value that starts with {@code initialValue}.
      *
-     * @since 1.1.0
+     * @since 2.0.0
      */
     @NotNull
     @Contract(pure = true)
@@ -390,7 +547,7 @@ public class IList<T> implements Iterable<T> {
     }
 
     /**
-     * @since 1.1.0
+     * @since 2.0.0
      */
     @NotNull
     public String join(String separator) {
@@ -405,7 +562,7 @@ public class IList<T> implements Iterable<T> {
     }
 
     /**
-     * @since 1.1.0
+     * @since 2.0.0
      */
     @NotNull
     public String join() {
@@ -413,7 +570,7 @@ public class IList<T> implements Iterable<T> {
     }
 
     /**
-     * @since 1.1.0
+     * @since 2.0.0
      */
     @NotNull
     public <K> Map<K, T> associateBy(IFunction<T, K> keySelector) {
@@ -425,7 +582,7 @@ public class IList<T> implements Iterable<T> {
     }
 
     /**
-     * @since 1.1.0
+     * @since 2.0.0
      */
     @NotNull
     public IList<T> peek(@NotNull IConsumer<? super T> consumer) {
@@ -436,7 +593,7 @@ public class IList<T> implements Iterable<T> {
     }
 
     /**
-     * @since 1.1.0
+     * @since 2.0.0
      */
     public void forEach(@NotNull IConsumer<? super T> consumer) {
         for (T item : this) {
@@ -452,7 +609,7 @@ public class IList<T> implements Iterable<T> {
      * @throws IndexOutOfBoundsException if the index is out of range
      *         (<tt>index &lt; 0 || index &gt;= size()</tt>)
      *
-     * @since 1.1.0
+     * @since 2.0.0
      */
     public T get(int index) {
         if (index < 0 || index >= size()) {
