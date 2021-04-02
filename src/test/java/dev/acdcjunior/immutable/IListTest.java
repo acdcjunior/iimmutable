@@ -4,14 +4,13 @@ import dev.acdcjunior.immutable.fn.IBiFunction;
 import dev.acdcjunior.immutable.fn.IConsumer;
 import dev.acdcjunior.immutable.fn.IFunction;
 import dev.acdcjunior.immutable.fn.IPredicate;
-import org.assertj.core.api.AbstractAssert;
-import org.assertj.core.api.AbstractThrowableAssert;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.function.ThrowingRunnable;
 
 import java.util.*;
 
+import static dev.acdcjunior.immutable.TestUtils.assertThatThrownBy;
 import static dev.acdcjunior.immutable.Wrapper.w;
 import static dev.acdcjunior.immutable.WrapperChild.wc;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -459,21 +458,6 @@ public class IListTest {
         }).isInstanceOf(IndexOutOfBoundsException.class).hasMessageContaining(
                 "Cannot `toIndex(1, 0)`: fromIndex (1) must be equal to or less than toIndex (0)"
         );
-    }
-
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    public static AbstractThrowableAssert<?, ? extends Throwable> assertThatThrownBy(ThrowingRunnable runnable) {
-        try {
-            runnable.run();
-            return new AbstractThrowableAssert(null, Object.class) {
-                @Override
-                public AbstractAssert isInstanceOf(Class type) {
-                    return new AbstractAssert(null, Object.class) { };
-                }
-            };
-        } catch (Throwable throwable) {
-            return assertThat(throwable);
-        }
     }
 
 }
