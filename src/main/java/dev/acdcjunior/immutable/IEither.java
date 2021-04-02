@@ -2,6 +2,7 @@ package dev.acdcjunior.immutable;
 
 import dev.acdcjunior.immutable.fn.IConsumer;
 import dev.acdcjunior.immutable.fn.IFunction;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,14 +16,22 @@ import static dev.acdcjunior.immutable.IList.listOf;
  *
  * @param <L> type of left value
  * @param <R> type of right value
+ *
+ * @since 1.0.0
  */
 public abstract class IEither<L, R> implements Iterable<R> {
 
+    /**
+     * @since 1.0.0
+     */
     @NotNull
     public static <L, R> IEither<L, R> left(@NotNull L left) {
         return new Left<L, R>(left);
     }
 
+    /**
+     * @since 1.0.0
+     */
     @NotNull
     public static <L, R> IEither<L, R> right(@NotNull R right) {
         return new Right<L, R>(right);
@@ -56,10 +65,10 @@ public abstract class IEither<L, R> implements Iterable<R> {
     public abstract IOption<L> toOptionLeft();
 
     @NotNull
-    public abstract IEither<L, R> ifLeft(@NotNull IConsumer<L> fn);
+    public abstract IEither<L, R> ifLeft(@NotNull IConsumer<? super L> fn);
 
     @NotNull
-    public abstract IEither<L, R> ifRight(@NotNull IConsumer<R> fn);
+    public abstract IEither<L, R> ifRight(@NotNull IConsumer<? super R> fn);
 
     @NotNull
     public abstract <R2> IEither<L, R2> map(@NotNull IFunction<? super R, R2> mapper);
@@ -69,6 +78,81 @@ public abstract class IEither<L, R> implements Iterable<R> {
 
     @NotNull
     public abstract <R2> IEither<L, R2> flatMap(@NotNull IFunction<? super R, IEither<L, R2>> mapper);
+
+    /**
+     * <p>
+     * Returns the result of the execution of {@code foldLeft} if the current instance is a {@link IEither.Left}
+     * or of {@code foldRight} if this is a {@link IEither.Right}.
+     * </p>
+     *
+     * Example:
+     * <pre><code>
+     * String result = (IEither&lt;A, B&gt; myEither).fold(
+     *      (a) -&gt; "was an A: " + a,
+     *      (b) -&gt; "was a B: " + b
+     * )
+     * </code></pre>
+     *
+     * @param foldLeft the function to apply when the current instance is a {@link IEither.Left}
+     * @param foldRight the function to apply when the current instance is a {@link IEither.Right}
+     * @return the results of applying the appropriate function
+     * @since 2.0.0
+     */
+    @NotNull
+    @SuppressWarnings("ConstantConditions")
+    public <T> T fold(@NotNull IFunction<? super L, T> foldLeft, @NotNull IFunction<? super R, T> foldRight) {
+        if (isLeft()) return mapLeft(foldLeft).left();
+        return map(foldRight).right();
+    }
+
+    /**
+     * If this is a {@link IEither.Right}, return its value. If a {@link IEither.Left}, execute {@code handleLeft}
+     * in its value, so it can be transformed into a {@link IEither.Right}.
+     *
+     * Example:
+     * <pre><code>
+     * String result = (IEither&lt;Long, String&gt;.left(123).getOrHandle(i -> String.valueOf(i));
+     * // result === "123"
+     * </code></pre>
+     * @since 2.0.0
+     */
+    public R getOrHandle(IFunction<L, R> handleLeft) {
+        return fold(handleLeft, new IFunction<R, R>() {
+            @Override
+            public R apply(R input) {
+                return input;
+            }
+        });
+    }
+
+    /**
+     * Creates an {@link IEither} with the left value in its right and the right value in its left.
+     *
+     * @return An {@link IEither.Left} if this is an {@link IEither.Right} and vice-versa.
+     * @since 2.0.0
+     */
+    @Contract(pure = true)
+    public IEither<R, L> swap() {
+        return fold(new IFunction<L, IEither<R, L>>() {
+            @Override
+            public IEither<R, L> apply(L input) {
+                return IEither.right(input);
+            }
+        }, new IFunction<R, IEither<R, L>>() {
+            @Override
+            public IEither<R, L> apply(R input) {
+                return IEither.left(input);
+            }
+        });
+    }
+
+    /**
+     * @since 2.0.0
+     */
+    public void accept(@NotNull IConsumer<? super L> ifLeft, @NotNull IConsumer<? super R> ifRight) {
+        ifLeft(ifLeft);
+        ifRight(ifRight);
+    }
 
     public static final class Left<L, R> extends IEither<L, R> {
         @NotNull
@@ -142,14 +226,14 @@ public abstract class IEither<L, R> implements Iterable<R> {
 
         @NotNull
         @Override
-        public IEither<L, R> ifLeft(@NotNull IConsumer<L> fn) {
+        public IEither<L, R> ifLeft(@NotNull IConsumer<? super L> fn) {
             fn.accept(getValue());
             return this;
         }
 
         @NotNull
         @Override
-        public IEither<L, R> ifRight(@NotNull IConsumer<R> fn) {
+        public IEither<L, R> ifRight(@NotNull IConsumer<? super R> fn) {
             return this;
         }
 
@@ -247,13 +331,13 @@ public abstract class IEither<L, R> implements Iterable<R> {
 
         @NotNull
         @Override
-        public IEither<L, R> ifLeft(@NotNull IConsumer<L> fn) {
+        public IEither<L, R> ifLeft(@NotNull IConsumer<? super L> fn) {
             return this;
         }
 
         @NotNull
         @Override
-        public IEither<L, R> ifRight(@NotNull IConsumer<R> fn) {
+        public IEither<L, R> ifRight(@NotNull IConsumer<? super R> fn) {
             fn.accept(getValue());
             return this;
         }

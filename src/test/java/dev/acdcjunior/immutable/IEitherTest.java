@@ -19,6 +19,15 @@ public class IEitherTest {
     private final IEither<Long, String> aRight = IEither.right(RIGHT_ARG);
 
     @Test
+    public void toString__hashCode() {
+        assertThat(aLeft.toString()).isEqualTo("Left(" + LEFT_ARG + ")");
+        assertThat(aRight.toString()).isEqualTo("Right(" + RIGHT_ARG + ")");
+
+        assertThat(aLeft.hashCode()).isEqualTo(LEFT_ARG.hashCode());
+        assertThat(aRight.hashCode()).isEqualTo(RIGHT_ARG.hashCode());
+    }
+
+    @Test
     public void left__builds_an_IEitherLeft() {
         assertThat(aLeft).isInstanceOf(IEither.Left.class);
         assertThat(((IEither.Left<String, Long>) aLeft).getValue()).isEqualTo(LEFT_ARG);
@@ -292,6 +301,58 @@ public class IEitherTest {
         });
         //noinspection AssertBetweenInconvertibleTypes
         assertThat(mapped).isEqualTo(aLeft);
+    }
+
+    @Test
+    public void getOrHandle() {
+        assertThat(
+            IEither.<String, Integer>right(12).getOrHandle(new IFunction<String, Integer>() {
+                @Override
+                public Integer apply(String input) {
+                    return 17;
+                }
+            })
+        ).isEqualTo(12);
+
+        assertThat(
+            IEither.<String, Integer>left("12").getOrHandle(new IFunction<String, Integer>() {
+                @Override
+                public Integer apply(String input) {
+                    return Integer.parseInt(input) + 5;
+                }
+            })
+        ).isEqualTo(17);
+    }
+
+    @Test
+    public void swap() {
+        assertThat(IEither.<String, Integer>right(123).swap()).isEqualTo(IEither.<Integer, String>left(123));
+        assertThat(IEither.<String, Integer>left("abc").swap()).isEqualTo(IEither.<Integer, String>right("abc"));
+    }
+
+
+    @Test
+    public void accept() {
+        final AtomicReference<String> leftVal = new AtomicReference<String>("originalLeft");
+        final AtomicReference<Long> rightVal = new AtomicReference<Long>(7777L);
+        IConsumer<String> acceptLeftConsumer = new IConsumer<String>() {
+            @Override
+            public void accept(String s) {
+                leftVal.set(leftVal.get() + s);
+            }
+        };
+        IConsumer<Long> acceptRightConsumer = new IConsumer<Long>() {
+            @Override
+            public void accept(Long s) {
+                rightVal.set(rightVal.get() + s);
+            }
+        };
+        // when
+        IEither.<String, Long>left("--left!").accept(acceptLeftConsumer, acceptRightConsumer);
+        IEither.<String, Long>right(2222L).accept(acceptLeftConsumer, acceptRightConsumer);
+        // then
+        assertThat(leftVal.get()).isEqualTo("originalLeft" + "--left!");
+        assertThat(rightVal.get()).isEqualTo(9999L);
     }
 
 }
