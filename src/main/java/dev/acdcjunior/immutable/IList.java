@@ -569,9 +569,9 @@ public class IList<T> implements Iterable<T> {
      * <p>Returns an {@link IOption} containing the first element of the list, if it exists and is not <code>null</code>.
      * If the list is empty <strong>or if the first element is <code>null</code></strong>, an {@link IOption.None} is returned.</p>
      *
-     * <p>If the first element of your list may be <code>null</code>, use {@link #firstNullable()}.</p>
+     * <p>If the first element of your list may be <code>null</code>, use {@link #firstOrNull()}.</p>
      *
-     * @see #firstNullable()
+     * @see #firstOrNull()
      *
      * @return An {@link IOption.None} if the list is empty or the first element is <code>null</code>. Otherwise, an
      *  {@link IOption.Some} containing the first element of the list.
@@ -598,7 +598,7 @@ public class IList<T> implements Iterable<T> {
      */
     @Nullable
     @Contract(pure = true)
-    public T firstNullable() {
+    public T firstOrNull() {
         if (this.isEmpty()) {
             return null;
         }

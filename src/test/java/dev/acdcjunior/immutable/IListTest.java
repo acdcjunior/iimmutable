@@ -6,7 +6,6 @@ import dev.acdcjunior.immutable.fn.IPredicate;
 import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.AbstractThrowableAssert;
 import org.assertj.core.api.Assertions;
-import org.assertj.core.api.WritableAssertionInfo;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.function.ThrowingRunnable;
@@ -183,10 +182,10 @@ public class IListTest {
     }
 
     @Test
-    public void firstNullable() {
-        assertThat(IList.listOf("aw", "be").firstNullable()).isEqualTo("aw");
-        assertThat(IList.listOf().firstNullable()).isNull();
-        assertThat(IList.listOf((Object) null).firstNullable()).isNull();
+    public void firstOrNull() {
+        assertThat(IList.listOf("aw", "be").firstOrNull()).isEqualTo("aw");
+        assertThat(IList.listOf().firstOrNull()).isNull();
+        assertThat(IList.listOf((Object) null).firstOrNull()).isNull();
     }
 
     @Test
