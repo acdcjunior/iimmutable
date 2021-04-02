@@ -16,9 +16,12 @@ public class IPairTest {
 
     @Test
     @SuppressWarnings("EqualsWithItself")
-    public void equals() {
+    public void equals__hashCode() {
         assertThat(IPair.pairOf(123, 456).equals(IPair.pairOf(123, 456))).isTrue();
         assertThat(IPair.pairOf(123, 456).equals(IPair.pairOf(456, 123))).isFalse();
+
+        assertThat(IPair.pairOf(123, 456).hashCode()).isEqualTo(IPair.pairOf(123, 456).hashCode());
+        assertThat(IPair.pairOf(123, 456).hashCode()).isNotEqualTo(IPair.pairOf(456, 123).hashCode());
     }
 
     @Test

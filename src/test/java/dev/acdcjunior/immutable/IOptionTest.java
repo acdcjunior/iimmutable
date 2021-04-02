@@ -63,6 +63,24 @@ public class IOptionTest {
     }
 
     @Test
+    public void toString_test() {
+        assertThat(aNone.toString()).isEqualTo("None");
+        assertThat(aSome.toString()).isEqualTo("Some(Stuff[a])");
+    }
+
+    @Test
+    public void equals__hashCode() {
+        assertThat(aNone).isEqualTo(aNone);
+        assertThat(aNone).isNotEqualTo(aSome);
+        assertThat(aNone).isSameAs(IOption.<Stuff>none());
+        assertThat(aNone.hashCode()).isEqualTo(IOption.<Stuff>none().hashCode());
+
+        assertThat(aSome).isEqualTo(IOption.some(SA));
+        assertThat(aSome).isNotEqualTo(IOption.some(SB));
+        assertThat(aSome.hashCode()).isEqualTo(IOption.some(SA).hashCode());
+    }
+
+    @Test
     public void ofNullable() {
         assertThat(IOption.ofNullable(SA)).isEqualTo(aSome);
         assertThat(IOption.ofNullable(null)).isEqualTo(IOption.none());

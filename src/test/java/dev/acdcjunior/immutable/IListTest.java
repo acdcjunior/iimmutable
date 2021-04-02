@@ -6,7 +6,6 @@ import dev.acdcjunior.immutable.fn.IFunction;
 import dev.acdcjunior.immutable.fn.IPredicate;
 import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.AbstractThrowableAssert;
-import org.assertj.core.api.Assertions;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.function.ThrowingRunnable;
@@ -51,9 +50,14 @@ public class IListTest {
     @Test
     public void toMutableList() {
         List<Wrapper> mutableList = iList.toMutableList();
-        Assertions.assertThat(mutableList).isEqualTo(iList.toList());
+        assertThat(mutableList).isEqualTo(iList.toList());
         mutableList.add(w("new"));
-        Assertions.assertThat(mutableList).isEqualTo(IList.listOf(w("a"), w("b"), w("c"), w("new")).toList());
+        assertThat(mutableList).isEqualTo(IList.listOf(w("a"), w("b"), w("c"), w("new")).toList());
+    }
+
+    @Test
+    public void listOf__Iterator_null_returns_emptyList() {
+        assertThat(IList.listOf((Iterator<Object>) null)).isEqualTo(IList.emptyList());
     }
 
     @Test

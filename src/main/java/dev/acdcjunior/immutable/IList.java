@@ -772,7 +772,7 @@ public class IList<T> implements Iterable<T> {
      *
      * @param fromIndex starting endpoint (inclusive) of the subList
      * @param toIndex ending endpoint (exclusive) of the subList
-     * @return A new {@link IList<T>} containing the elements of the specified range.
+     * @return A new {@link IList} containing the elements of the specified range.
      *
      * @since 1.0.0
      */

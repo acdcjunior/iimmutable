@@ -158,7 +158,7 @@ public abstract class IEither<L, R> implements Iterable<R> {
      *
      * Example:
      * <pre><code>
-     * String result = (IEither&lt;Long, String&gt;.left(123).getOrHandle(i -> String.valueOf(i));
+     * String result = (IEither&lt;Long, String&gt;.left(123).getOrHandle(i -&gt; String.valueOf(i));
      * // result === "123"
      * </code></pre>
      *

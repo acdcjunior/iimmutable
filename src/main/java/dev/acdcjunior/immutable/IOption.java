@@ -383,7 +383,7 @@ public abstract class IOption<T> implements Iterable<T> {
      */
     public static final class None<T> extends IOption<T> {
 
-        public static final None<?> NONE = new None<Object>();
+        private static final None<?> NONE = new None<Object>();
 
         private None() { }
 

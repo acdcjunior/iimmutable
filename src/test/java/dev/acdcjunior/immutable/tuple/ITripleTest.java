@@ -23,6 +23,9 @@ public class ITripleTest {
         assertThat(ITriple.tripleOf(111, 222, 333).equals(ITriple.tripleOf(111, 222, 444))).isFalse();
         assertThat(ITriple.tripleOf(111, 222, 333).equals(ITriple.tripleOf(111, 444, 333))).isFalse();
         assertThat(ITriple.tripleOf(111, 222, 333).equals(ITriple.tripleOf(444, 222, 333))).isFalse();
+
+        assertThat(ITriple.tripleOf(111, 222, 333).hashCode()).isEqualTo(ITriple.tripleOf(111, 222, 333).hashCode());
+        assertThat(ITriple.tripleOf(111, 222, 333).hashCode()).isNotEqualTo(ITriple.tripleOf(111, 333, 222).hashCode());
     }
 
 }
