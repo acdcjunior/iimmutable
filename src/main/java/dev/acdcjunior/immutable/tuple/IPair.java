@@ -54,18 +54,13 @@ public class IPair<A, B> {
     /**
      * @since 1.0.0
      */
-    public A getA() {
-        return a;
-    }
-
-    /**
-     * @since 1.0.0
-     */
     public A getLeft() {
         return a;
     }
 
     /**
+     * Alias to {@link #getLeft()}.
+     *
      * @since 1.0.0
      */
     public A left() {
@@ -73,10 +68,30 @@ public class IPair<A, B> {
     }
 
     /**
+     * Alias to {@link #getLeft()}.
+     *
      * @since 1.0.0
      */
-    public B getB() {
-        return b;
+    public A getA() {
+        return a;
+    }
+
+    /**
+     * Alias to {@link #getLeft()}.
+     *
+     * @since 1.0.0
+     */
+    public A getKey() {
+        return a;
+    }
+
+    /**
+     * Alias to {@link #getLeft()}.
+     *
+     * @since 1.0.0
+     */
+    public A key() {
+        return a;
     }
 
     /**
@@ -87,9 +102,38 @@ public class IPair<A, B> {
     }
 
     /**
+     * Alias to {@link #getRight()}.
+     *
      * @since 1.0.0
      */
     public B right() {
+        return b;
+    }
+
+    /**
+     * Alias to {@link #getRight()}.
+     *
+     * @since 1.0.0
+     */
+    public B getB() {
+        return b;
+    }
+
+    /**
+     * Alias to {@link #getRight()}.
+     *
+     * @since 1.0.0
+     */
+    public B getValue() {
+        return b;
+    }
+
+    /**
+     * Alias to {@link #getRight()}.
+     *
+     * @since 1.0.0
+     */
+    public B value() {
         return b;
     }
 

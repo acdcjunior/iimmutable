@@ -35,9 +35,14 @@ public class IPairTest {
         assertThat(p.getLeft()).isEqualTo(123);
         assertThat(p.getA()).isEqualTo(123);
         assertThat(p.left()).isEqualTo(123);
+        assertThat(p.getKey()).isEqualTo(123);
+        assertThat(p.key()).isEqualTo(123);
+
         assertThat(p.getRight()).isEqualTo(456);
         assertThat(p.getB()).isEqualTo(456);
         assertThat(p.right()).isEqualTo(456);
+        assertThat(p.getValue()).isEqualTo(456);
+        assertThat(p.value()).isEqualTo(456);
     }
 
 }
