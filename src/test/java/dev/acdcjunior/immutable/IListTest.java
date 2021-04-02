@@ -3,8 +3,13 @@ package dev.acdcjunior.immutable;
 import dev.acdcjunior.immutable.fn.IBiFunction;
 import dev.acdcjunior.immutable.fn.IFunction;
 import dev.acdcjunior.immutable.fn.IPredicate;
+import org.assertj.core.api.AbstractAssert;
+import org.assertj.core.api.AbstractThrowableAssert;
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.WritableAssertionInfo;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+import org.junit.function.ThrowingRunnable;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -13,6 +18,7 @@ import java.util.List;
 import static dev.acdcjunior.immutable.Wrapper.w;
 import static dev.acdcjunior.immutable.WrapperChild.wc;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertThrows;
 
 
 public class IListTest {
@@ -31,9 +37,26 @@ public class IListTest {
         }
     };
 
+    private final IList<Wrapper> iList = IList.listOf(w("a"), w("b"));
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void toList__returned_list_must_be_immutable___add() {
+        List<Wrapper> list = iList.toList();
+        list.add(w("new"));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void toList__returned_list_must_be_immutable___set() {
+        List<Wrapper> list = iList.toList();
+        list.set(0, w("new"));
+    }
+
     @Test
-    public void empty__is_an_alias_to_none() {
-        assertThat(IOption.empty()).isSameAs(IOption.none());
+    public void toMutableList() {
+        List<Wrapper> mutableList = iList.toMutableList();
+        Assertions.assertThat(mutableList).isEqualTo(iList.toList());
+        mutableList.add(w("new"));
+        Assertions.assertThat(mutableList).isEqualTo(IList.listOf(w("a"), w("b"), w("new")).toList());
     }
 
     @Test
@@ -45,6 +68,17 @@ public class IListTest {
             }
         });
         assertThat(cs).containsExactly('A', 'B');
+    }
+
+    @Test
+    public void mapIndexed() {
+        IList<String> cs = IList.listOf(Arrays.asList('a', 'b').iterator()).mapIndexed(new IBiFunction<Integer, Character, String>() {
+            @Override
+            public String apply(Integer index, Character input) {
+                return String.valueOf(index) + Character.toUpperCase(input);
+            }
+        });
+        assertThat(cs).containsExactly("0A", "1B");
     }
 
     @Test
@@ -264,14 +298,95 @@ public class IListTest {
         assertThat(ss.get(2)).isEqualTo("c");
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void get__negative_index() {
-        IList.listOf("a").get(-1);
+    @Test
+    public void get__rangeCheck_exceptions() {
+        final IList<String> ls = IList.listOf("a", "b");
+        assertThatThrownBy(new ThrowingRunnable() {
+            @Override
+            public void run() {
+                ls.get(-1);
+            }
+        }).isInstanceOf(IndexOutOfBoundsException.class).hasMessageContaining(
+                "Cannot `get(-1)`: Index (-1) must be equal to or greater than zero and less than size (2)"
+        );
+        assertThatThrownBy(new ThrowingRunnable() {
+            @Override
+            public void run() {
+                ls.get(99);
+            }
+        }).isInstanceOf(IndexOutOfBoundsException.class).hasMessageContaining(
+                "Cannot `get(99)`: Index (99) must be equal to or greater than zero and less than size (2)"
+        );
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void get__index_greater_than_size() {
-        IList.listOf("a", "b", "c").get(9);
+    @Test
+    public void set() {
+        // TODO
+    }
+
+    @Test
+    public void remove() {
+        // TODO
+    }
+
+    @Test
+    public void contains() {
+        // TODO
+    }
+
+    @Test
+    public void subList() {
+        IList<String> ls = IList.listOf("a", "b", "c", "d", "e");
+        IList<String> subLs = ls.subList(0, 2);
+        assertThat(subLs).isEqualTo(IList.listOf("a", "b"));
+    }
+
+    @Test
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public void subList__rangeCheck_exceptions() {
+        final IList<String> ls = IList.listOf("a", "b");
+
+        assertThatThrownBy(new ThrowingRunnable() {
+            @Override
+            public void run() {
+                ls.subList(-1, 1);
+            }
+        }).isInstanceOf(IndexOutOfBoundsException.class).hasMessageContaining(
+                "Cannot `subList(-1, 1)`: fromIndex (-1) must be equal to or greater than zero and less than size (2)"
+        );
+
+        assertThatThrownBy(new ThrowingRunnable() {
+            @Override
+            public void run() {
+                ls.subList(0, 3);
+            }
+        }).isInstanceOf(IndexOutOfBoundsException.class).hasMessageContaining(
+                "Cannot `toIndex(0, 3)`: toIndex (3) must be equal to or less than size (2)"
+        );
+
+        assertThatThrownBy(new ThrowingRunnable() {
+            @Override
+            public void run() {
+                ls.subList(1, 0);
+            }
+        }).isInstanceOf(IndexOutOfBoundsException.class).hasMessageContaining(
+                "Cannot `toIndex(1, 0)`: fromIndex (1) must be equal to or less than toIndex (0)"
+        );
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    public static AbstractThrowableAssert<?, ? extends Throwable> assertThatThrownBy(ThrowingRunnable runnable) {
+        try {
+            runnable.run();
+            return new AbstractThrowableAssert(null, Object.class) {
+                @Override
+                public AbstractAssert isInstanceOf(Class type) {
+                    return new AbstractAssert(null, Object.class) { };
+                }
+            };
+        } catch (Throwable throwable) {
+            return assertThat(throwable);
+        }
     }
 
 }
@@ -279,13 +394,17 @@ public class IListTest {
 class Wrapper {
     static Wrapper w(String w) { return new Wrapper(w); }
     final String w;
-    Wrapper(String w) { this.w = "w:" + w; }
+    Wrapper(@NotNull String w) { this.w = "w:" + w; }
     @Override public String toString() { return w; }
+    @Override public boolean equals(Object o) { return o instanceof Wrapper && ((Wrapper) o).w.equals(w); }
+    @Override public int hashCode() { return w.hashCode(); }
 }
 @SuppressWarnings("unused")
 class WrapperChild extends Wrapper {
     static WrapperChild wc(String wc) { return new WrapperChild(wc); }
     final String wc;
-    WrapperChild(String wc) { super("child:" + wc); this.wc = "wc:" + wc; }
+    WrapperChild(@NotNull String wc) { super("child:" + wc); this.wc = "wc:" + wc; }
     @Override public String toString() { return wc; }
+    @Override public boolean equals(Object o) { return o instanceof WrapperChild && ((WrapperChild) o).w.equals(w) && ((WrapperChild) o).wc.equals(wc); }
+    @Override public int hashCode() { return 31 * super.hashCode() + wc.hashCode(); }
 }

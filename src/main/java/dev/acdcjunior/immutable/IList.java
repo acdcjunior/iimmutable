@@ -54,7 +54,7 @@ public class IList<T> implements Iterable<T> {
         if (items == null || items.length == 0) {
             return emptyList();
         }
-        return new IList<T>(new ArrayList<T>(Arrays.asList(items)));
+        return new IList<T>(Arrays.asList(items));
     }
 
     /**
@@ -114,7 +114,7 @@ public class IList<T> implements Iterable<T> {
     private final List<T> immutableBackingList;
 
     private IList(@NotNull List<T> immutableBackingList) {
-        this.immutableBackingList = immutableBackingList;
+        this.immutableBackingList = Collections.unmodifiableList(immutableBackingList);
     }
 
     /**
@@ -157,6 +157,15 @@ public class IList<T> implements Iterable<T> {
      * @since 1.0.0
      */
     @NotNull
+    @Contract(pure = true)
+    public List<T> toMutableList() {
+        return new ArrayList<T>(immutableBackingList);
+    }
+
+    /**
+     * @since 1.0.0
+     */
+    @NotNull
     @Override
     public Iterator<T> iterator() {
         return immutableBackingList.iterator();
@@ -179,6 +188,20 @@ public class IList<T> implements Iterable<T> {
         List<R> rs = new ArrayList<R>(this.size());
         for (T item : this) {
             rs.add(mapper.apply(item));
+        }
+        return new IList<R>(rs);
+    }
+
+    /**
+     * @since 1.0.0
+     */
+    @NotNull
+    @Contract(pure = true)
+    public <R> IList<R> mapIndexed(@NotNull IBiFunction<Integer, ? super T, ? extends R> mapper) {
+        List<R> rs = new ArrayList<R>(this.size());
+        int index = 0;
+        for (T item : this) {
+            rs.add(mapper.apply(index++, item));
         }
         return new IList<R>(rs);
     }
@@ -342,7 +365,7 @@ public class IList<T> implements Iterable<T> {
     @NotNull
     @Contract(pure = true)
     public IList<T> subtract(@NotNull Iterable<T> other) {
-        final List<T> otherLs = IListUtils.toArrayList(other);
+        final IList<T> otherLs = IList.listOf(other);
         return filter(new IPredicate<T>() {
             @Override
             public boolean test(@Nullable T t) {
@@ -686,6 +709,13 @@ public class IList<T> implements Iterable<T> {
     }
 
     /**
+     * @since 1.0.0
+     */
+    public boolean contains(T e) {
+        return immutableBackingList.contains(e);
+    }
+
+    /**
      * Returns the element at the specified position in this list.
      *
      * @param index index of the element to return
@@ -693,13 +723,79 @@ public class IList<T> implements Iterable<T> {
      * @throws IndexOutOfBoundsException if the index is out of range
      *         (<tt>index &lt; 0 || index &gt;= size()</tt>)
      *
-     * @since 2.0.0
+     * @since 1.0.0
      */
     public T get(int index) {
-        if (index < 0 || index >= size()) {
-            throw new IndexOutOfBoundsException("Index has to be greater than zero and less than size(). Index: " + index + " Size: " + size());
-        }
+        rangeCheck(index, size(), "Cannot `get(%d)`: ", index);
+
         return immutableBackingList.get(index);
+    }
+
+    private static void rangeCheck(int index, int size, String format, Object... args) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException(
+                    String.format("%sIndex (%d) must be equal to or greater than zero and less than size (%d)", String.format(format, args), index, size)
+            );
+        }
+    }
+
+    /**
+     * @since 1.0.0
+     */
+    public IList<T> set(int index, T e) {
+        rangeCheck(index, size(), "Cannot `set(%d, %s)`: ", index, e);
+
+        List<T> copy = new ArrayList<T>(this.immutableBackingList);
+        copy.set(index, e);
+        return new IList<T>(copy);
+    }
+
+    /**
+     * @since 1.0.0
+     */
+    public IList<T> remove(int index) {
+        rangeCheck(index, size(), "Cannot `remove(%d)`: ", index);
+
+        List<T> copy = new ArrayList<T>(this.immutableBackingList);
+        copy.remove(index);
+        return new IList<T>(copy);
+    }
+
+    /**
+     * Creates a new list containing the elements of a range.
+     *
+     * @param fromIndex starting endpoint (inclusive) of the subList
+     * @param toIndex ending endpoint (exclusive) of the subList
+     * @return A new {@link IList<T>} containing the elements of the specified range.
+     *
+     * @since 1.0.0
+     */
+    @Contract(pure = true)
+    public IList<T> subList(int fromIndex, int toIndex) {
+        subListRangeCheck(fromIndex, toIndex, size());
+
+        return new IList<T>(new ArrayList<T>(this.immutableBackingList.subList(fromIndex, toIndex)));
+    }
+
+    private static void subListRangeCheck(int fromIndex, int toIndex, int size) {
+        if (fromIndex < 0) {
+            throw new IndexOutOfBoundsException(String.format(
+                    "Cannot `subList(%d, %d)`: fromIndex (%d) must be equal to or greater than zero and less than size (%d)",
+                    fromIndex, toIndex, fromIndex, size
+            ));
+        }
+        if (toIndex > size) {
+            throw new IndexOutOfBoundsException(String.format(
+                    "Cannot `toIndex(%d, %d)`: toIndex (%d) must be equal to or less than size (%d)",
+                    fromIndex, toIndex, toIndex, size
+            ));
+        }
+        if (fromIndex > toIndex) {
+            throw new IndexOutOfBoundsException(String.format(
+                    "Cannot `toIndex(%d, %d)`: fromIndex (%d) must be equal to or less than toIndex (%d)",
+                    fromIndex, toIndex, fromIndex, toIndex
+            ));
+        }
     }
 
 }

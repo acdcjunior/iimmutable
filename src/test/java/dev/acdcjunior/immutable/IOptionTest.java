@@ -40,8 +40,13 @@ public class IOptionTest {
         }
     };
 
-    @SuppressWarnings("ConstantConditions")
     @Test
+    public void empty__is_an_alias_to_none() {
+        assertThat(IOption.empty()).isSameAs(IOption.none());
+    }
+
+    @Test
+    @SuppressWarnings({"ConstantConditions", "CatchMayIgnoreException"})
     public void some() {
         assertThat(aSome).isEqualTo(aSome);
         try {
@@ -88,6 +93,7 @@ public class IOptionTest {
     }
 
     @Test
+    @SuppressWarnings("CatchMayIgnoreException")
     public void get() {
         assertThat(aSome.get()).isSameAs(SA);
         try {
