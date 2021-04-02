@@ -20,14 +20,14 @@ import java.util.*;
  */
 public class IList<T> implements Iterable<T> {
 
-    public static final int ARRAYLIST_DEFAULT_CAPACITY = 10;
+    private static final int ARRAYLIST_DEFAULT_CAPACITY = 10;
 
-    public static final int FLATMAP_MAPPER_FUNCTION_MEAN_EXPECTED_ELEMENTS = 2;
+    private static final int FLATMAP_MAPPER_FUNCTION_DEFAULT_EXPECTED_ELEMENTS = 2;
 
-    public static final int JOIN_FUNCTION_MEAN_EXPECTED_ELEMENTS_STRING_SIZE = 5;
+    private static final int JOIN_FUNCTION_DEFAULT_EXPECTED_ELEMENTS_STRING_SIZE = 5;
 
     @SuppressWarnings({"rawtypes", "unchecked"})
-    public static final IList EMPTY_ILIST = new IList(Collections.emptyList());
+    private static final IList EMPTY_ILIST = new IList(Collections.emptyList());
 
     /**
      * @since 1.0.0
@@ -192,7 +192,7 @@ public class IList<T> implements Iterable<T> {
     @NotNull
     @Contract(pure = true)
     public <R> IList<R> flatMap(@NotNull IFunction<? super T, Iterable<? extends R>> mapper) {
-        List<R> rs = new ArrayList<R>(this.size() * FLATMAP_MAPPER_FUNCTION_MEAN_EXPECTED_ELEMENTS);
+        List<R> rs = new ArrayList<R>(this.size() * FLATMAP_MAPPER_FUNCTION_DEFAULT_EXPECTED_ELEMENTS);
         for (T item : this) {
             Iterable<? extends R> frs = mapper.apply(item);
             for (R r : frs) {
@@ -635,7 +635,7 @@ public class IList<T> implements Iterable<T> {
      */
     @NotNull
     public String join(String separator) {
-        StringBuilder sb = new StringBuilder(immutableBackingList.size() * JOIN_FUNCTION_MEAN_EXPECTED_ELEMENTS_STRING_SIZE);
+        StringBuilder sb = new StringBuilder(immutableBackingList.size() * JOIN_FUNCTION_DEFAULT_EXPECTED_ELEMENTS_STRING_SIZE);
         for (int i = 0, backingListSize = immutableBackingList.size(); i < backingListSize; i++) {
             sb.append(immutableBackingList.get(i));
             if (i < backingListSize - 1) {
