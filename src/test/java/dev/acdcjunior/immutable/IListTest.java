@@ -299,6 +299,26 @@ public class IListTest {
     }
 
     @Test
+    public void associateBy__valueTransform() {
+        Map<String, Character> map = new HashMap<String, Character>();
+        map.put(iList.get(0).wKey(), iList.get(0).toString().charAt(2));
+        map.put(iList.get(1).wKey(), iList.get(1).toString().charAt(2));
+        map.put(iList.get(2).wKey(), iList.get(2).toString().charAt(2));
+
+        assertThat(iList.associateBy(new IFunction<Wrapper, String>() {
+            @Override
+            public String apply(Wrapper input) {
+                return input.wKey();
+            }
+        }, new IFunction<Wrapper, Character>() {
+            @Override
+            public Character apply(Wrapper input) {
+                return input.w.charAt(2);
+            }
+        })).isEqualTo(map);
+    }
+
+    @Test
     public void peek() {
         final ArrayList<Wrapper> ws = new ArrayList<Wrapper>();
 

@@ -698,6 +698,18 @@ public class IList<T> implements Iterable<T> {
      * @since 1.0.0
      */
     @NotNull
+    public <K, V> Map<K, V> associateBy(IFunction<T, K> keySelector, IFunction<T, V> valueTransform) {
+        Map<K, V> map = new HashMap<K, V>(immutableBackingList.size());
+        for (T el : immutableBackingList) {
+            map.put(keySelector.apply(el), valueTransform.apply(el));
+        }
+        return map;
+    }
+
+    /**
+     * @since 1.0.0
+     */
+    @NotNull
     public IList<T> peek(@NotNull IConsumer<? super T> consumer) {
         for (T item : this) {
             consumer.accept(item);
