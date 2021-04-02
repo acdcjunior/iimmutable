@@ -152,12 +152,18 @@ public class IListTest {
     }
 
     @Test
-    public void equals() {
+    @SuppressWarnings("EqualsBetweenInconvertibleTypes")
+    public void equals__hashCode() {
         String a = "a";
         String b = "b";
         IList<String> la = IList.listOf(a, b);
         IList<String> lb = IList.listOf(a, b);
         assertThat(la.equals(lb)).isTrue();
+        assertThat(la.hashCode()).isEqualTo(lb.hashCode());
+
+        ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(a, b));
+        assertThat(la.equals(arrayList)).isTrue();
+        assertThat(la.hashCode()).isEqualTo(arrayList.hashCode());
     }
 
     @Test
