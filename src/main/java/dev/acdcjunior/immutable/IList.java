@@ -252,6 +252,34 @@ public class IList<T> implements Iterable<T> {
     }
 
     /**
+     * @return The index of the first element equals the argument, or -1 if no elements are equal to it.
+     *
+     * @since 1.0.0
+     */
+    @Contract(pure = true)
+    @SuppressWarnings("SuspiciousMethodCalls")
+    public int indexOf(@Nullable Object e) {
+        return immutableBackingList.indexOf(e);
+    }
+
+    /**
+     * @return The index of the first element that matches the predicate, or -1 if none matches.
+     *
+     * @since 1.0.0
+     */
+    @Contract(pure = true)
+    public int indexOf(@NotNull IPredicate<? super T> predicate) {
+        int index = 0;
+        for (T item : this) {
+            if (predicate.test(item)) {
+                return index;
+            }
+            index++;
+        }
+        return -1;
+    }
+
+    /**
      * Tests if no elements match the given predicate.
      *
      * @since 1.0.0

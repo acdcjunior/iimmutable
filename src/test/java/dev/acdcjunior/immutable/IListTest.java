@@ -210,6 +210,33 @@ public class IListTest {
     }
 
     @Test
+    public void indexOf() {
+        assertThat(iList.indexOf(w("a"))).isEqualTo(0);
+        assertThat(iList.indexOf(w("b"))).isEqualTo(1);
+        assertThat(iList.indexOf(w("@"))).isEqualTo(-1);
+
+        assertThat(iList.indexOf(new IPredicate<Wrapper>() {
+            @Override
+            public boolean test(Wrapper input) {
+                return input.w.equals("w:a");
+            }
+        })).isEqualTo(0);
+        assertThat(iList.indexOf(new IPredicate<Wrapper>() {
+            @Override
+            public boolean test(Wrapper input) {
+                return input.w.equals("w:b");
+            }
+        })).isEqualTo(1);
+        assertThat(iList.indexOf(new IPredicate<Wrapper>() {
+            @Override
+            public boolean test(Wrapper input) {
+                return input.w.equals("@");
+            }
+        })).isEqualTo(-1);
+    }
+
+
+    @Test
     public void any() {
         assertThat(IList.listOf("aw", "be").any(ALL_CAPS_PREDICATE)).isEqualTo(false);
         assertThat(IList.listOf("aw", "BE").any(ALL_CAPS_PREDICATE)).isEqualTo(true);
