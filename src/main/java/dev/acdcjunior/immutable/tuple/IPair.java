@@ -1,8 +1,14 @@
 package dev.acdcjunior.immutable.tuple;
 
 
+/**
+ * @since 1.0.0
+ */
 public class IPair<A, B> {
 
+    /**
+     * @since 1.0.0
+     */
     public static <A, B> IPair<A, B> pairOf(A a, B b) {
         return new IPair<A, B>(a, b);
     }
@@ -10,11 +16,14 @@ public class IPair<A, B> {
     private final A a;
     private final B b;
 
-    public IPair(A a, B b) {
+    private IPair(A a, B b) {
         this.a = a;
         this.b = b;
     }
 
+    /**
+     * @since 1.0.0
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -24,6 +33,9 @@ public class IPair<A, B> {
         return b != null ? b.equals(iPair.b) : iPair.b == null;
     }
 
+    /**
+     * @since 1.0.0
+     */
     @Override
     public int hashCode() {
         int result = a != null ? a.hashCode() : 0;
@@ -31,33 +43,54 @@ public class IPair<A, B> {
         return result;
     }
 
+    /**
+     * @since 1.0.0
+     */
+    @Override
+    public String toString() {
+        return "(" + a + ", " + b + ')';
+    }
+
+    /**
+     * @since 1.0.0
+     */
     public A getA() {
         return a;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public A getLeft() {
         return a;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public A left() {
         return a;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public B getB() {
         return b;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public B getRight() {
         return b;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public B right() {
         return b;
-    }
-
-    @Override
-    public String toString() {
-        return "(" + a + ", " + b + ')';
     }
 
 }

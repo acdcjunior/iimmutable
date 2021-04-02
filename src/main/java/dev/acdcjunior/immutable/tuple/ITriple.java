@@ -1,8 +1,14 @@
 package dev.acdcjunior.immutable.tuple;
 
 
+/**
+ * @since 1.0.0
+ */
 public class ITriple<A, B, C> {
 
+    /**
+     * @since 1.0.0
+     */
     public static <A, B, C> ITriple<A, B, C> tripleOf(A a, B b, C c) {
         return new ITriple<A, B, C>(a, b, c);
     }
@@ -11,12 +17,15 @@ public class ITriple<A, B, C> {
     private final B b;
     private final C c;
 
-    public ITriple(A a, B b, C c) {
+    private ITriple(A a, B b, C c) {
         this.a = a;
         this.b = b;
         this.c = c;
     }
 
+    /**
+     * @since 1.0.0
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -27,6 +36,9 @@ public class ITriple<A, B, C> {
         return c != null ? c.equals(iTriple.c) : iTriple.c == null;
     }
 
+    /**
+     * @since 1.0.0
+     */
     @Override
     public int hashCode() {
         int result = a != null ? a.hashCode() : 0;
@@ -35,14 +47,23 @@ public class ITriple<A, B, C> {
         return result;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public A getA() {
         return a;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public B getB() {
         return b;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public C getC() {
         return c;
     }

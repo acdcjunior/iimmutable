@@ -2,10 +2,13 @@ package dev.acdcjunior.immutable.fn;
 
 
 /**
- * @since 1.1.0
+ * @since 1.0.0
  */
 public interface IBiPredicate<A, B> {
 
-  boolean test(A a, B b);
+    /**
+     * @since 1.0.0
+     */
+    boolean test(A a, B b);
 
 }

@@ -14,6 +14,7 @@ import static dev.acdcjunior.immutable.IList.listOf;
  * An immutable set.
  *
  * @param <T> The type of the elements.
+ *
  * @since 1.0.0
  */
 public class ISet<T> {
@@ -34,6 +35,7 @@ public class ISet<T> {
 
     /**
      * Returns an immutable {@link Set} instance.
+     *
      * @since 1.0.0
      */
     @NotNull

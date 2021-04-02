@@ -6,6 +6,9 @@ package dev.acdcjunior.immutable.fn;
  */
 public interface IBiConsumer<A, B> {
 
+    /**
+     * @since 1.0.0
+     */
     void accept(A a, B b);
 
 }

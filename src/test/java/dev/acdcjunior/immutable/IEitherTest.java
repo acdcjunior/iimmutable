@@ -91,6 +91,7 @@ public class IEitherTest {
     @Test
     public void isDefined_IEitherLeft___returns_false() {
         assertThat(aLeft.isDefined()).isFalse();
+        assertThat(aLeft.isRight()).isFalse();
     }
 
     @Test
@@ -101,6 +102,7 @@ public class IEitherTest {
     @Test
     public void isDefined_IEitherRight___returns_true() {
         assertThat(aRight.isDefined()).isTrue();
+        assertThat(aRight.isRight()).isTrue();
     }
 
     @Test
