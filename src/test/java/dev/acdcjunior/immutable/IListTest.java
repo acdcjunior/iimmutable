@@ -1,6 +1,7 @@
 package dev.acdcjunior.immutable;
 
 import dev.acdcjunior.immutable.fn.IBiFunction;
+import dev.acdcjunior.immutable.fn.IConsumer;
 import dev.acdcjunior.immutable.fn.IFunction;
 import dev.acdcjunior.immutable.fn.IPredicate;
 import org.assertj.core.api.AbstractAssert;
@@ -10,14 +11,11 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.function.ThrowingRunnable;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import static dev.acdcjunior.immutable.Wrapper.w;
 import static dev.acdcjunior.immutable.WrapperChild.wc;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertThrows;
 
 
 public class IListTest {
@@ -36,7 +34,7 @@ public class IListTest {
         }
     };
 
-    private final IList<Wrapper> iList = IList.listOf(w("a"), w("b"));
+    private final IList<Wrapper> iList = IList.listOf(w("a"), w("b"), w("c"));
 
     @Test(expected = UnsupportedOperationException.class)
     public void toList__returned_list_must_be_immutable___add() {
@@ -55,7 +53,7 @@ public class IListTest {
         List<Wrapper> mutableList = iList.toMutableList();
         Assertions.assertThat(mutableList).isEqualTo(iList.toList());
         mutableList.add(w("new"));
-        Assertions.assertThat(mutableList).isEqualTo(IList.listOf(w("a"), w("b"), w("new")).toList());
+        Assertions.assertThat(mutableList).isEqualTo(IList.listOf(w("a"), w("b"), w("c"), w("new")).toList());
     }
 
     @Test
@@ -277,17 +275,45 @@ public class IListTest {
 
     @Test
     public void associateBy() {
-        // TODO
+        Map<String, Wrapper> map = new HashMap<String, Wrapper>();
+        map.put(iList.get(0).wKey(), iList.get(0));
+        map.put(iList.get(1).wKey(), iList.get(1));
+        map.put(iList.get(2).wKey(), iList.get(2));
+
+        assertThat(iList.associateBy(new IFunction<Wrapper, String>() {
+            @Override
+            public String apply(Wrapper input) {
+                return input.wKey();
+            }
+        })).isEqualTo(map);
     }
 
     @Test
     public void peek() {
-        // TODO
+        final ArrayList<Wrapper> ws = new ArrayList<Wrapper>();
+
+        assertThat(iList.peek(new IConsumer<Wrapper>() {
+            @Override
+            public void accept(Wrapper wrapper) {
+                ws.add(wrapper);
+            }
+        }).toString()).isEqualTo("[w:a, w:b, w:c]");
+
+        assertThat(ws).isEqualTo(iList.toList());
     }
 
     @Test
     public void forEach() {
-        // TODO
+        final ArrayList<Wrapper> ws = new ArrayList<Wrapper>();
+
+        iList.forEach(new IConsumer<Wrapper>() {
+            @Override
+            public void accept(Wrapper wrapper) {
+                ws.add(wrapper);
+            }
+        });
+
+        assertThat(ws).isEqualTo(iList.toList());
     }
 
     @Test
@@ -320,17 +346,22 @@ public class IListTest {
 
     @Test
     public void set() {
-        // TODO
+        assertThat(iList.set(0, w("@"))).isEqualTo(IList.listOf(w("@"), w("b"), w("c")));
+        assertThat(iList.set(1, w("@"))).isEqualTo(IList.listOf(w("a"), w("@"), w("c")));
+        assertThat(iList.set(2, w("@"))).isEqualTo(IList.listOf(w("a"), w("b"), w("@")));
     }
 
     @Test
     public void remove() {
-        // TODO
+        assertThat(iList.remove(0)).isEqualTo(IList.listOf(w("b"), w("c")));
+        assertThat(iList.remove(1)).isEqualTo(IList.listOf(w("a"), w("c")));
+        assertThat(iList.remove(2)).isEqualTo(IList.listOf(w("a"), w("b")));
     }
 
     @Test
     public void contains() {
-        // TODO
+        assertThat(iList.contains(w("a"))).isTrue();
+        assertThat(iList.contains(w("@"))).isFalse();
     }
 
     @Test
@@ -394,6 +425,7 @@ class Wrapper {
     static Wrapper w(String w) { return new Wrapper(w); }
     final String w;
     Wrapper(@NotNull String w) { this.w = "w:" + w; }
+    public String wKey() { return "KEY("+w+")"; }
     @Override public String toString() { return w; }
     @Override public boolean equals(Object o) { return o instanceof Wrapper && ((Wrapper) o).w.equals(w); }
     @Override public int hashCode() { return w.hashCode(); }
