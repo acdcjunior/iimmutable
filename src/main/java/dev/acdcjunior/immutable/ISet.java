@@ -84,7 +84,7 @@ public class ISet<T> {
     @Override
     @Contract(pure = true)
     public String toString() {
-        return "ISet" + immutableBackingSet;
+        return immutableBackingSet.toString();
     }
 
 }

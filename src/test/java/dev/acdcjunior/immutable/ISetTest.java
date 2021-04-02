@@ -15,7 +15,7 @@ public class ISetTest {
 
     @Test
     public void toString__equals__hashCode() {
-        Assertions.assertThat(iSet.toString()).isEqualTo("ISet[a, b, c]");
+        Assertions.assertThat(iSet.toString()).isEqualTo("[a, b, c]");
         Assertions.assertThat(iSet.equals(ISet.setOf("a", "b", "c"))).isTrue();
         Assertions.assertThat(iSet.hashCode()).isEqualTo(ISet.setOf("a", "b", "c").hashCode());
     }
