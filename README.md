@@ -5,12 +5,19 @@ One of our main goals is to always support Java 6, working as a lifeboat for tho
 
 ## Examples
 
-    IList<String> l = IList.listOf("a", "b", "c");
-    IPair<Integer, String> p = IPair.pairOf(123, "abc");
-    ITriple<Integer, String, Long> t = ITriple.tripleOf(123, "abc", 555L);
+```java
+IList<String> l = IList.listOf("a", "b", "c");
+IPair<Integer, String> p = IPair.pairOf(123, "abc");
+ITriple<Integer, String, Long> t = ITriple.tripleOf(123, "abc", 555L);
 
-    ISet<String> s = ISet.setOf("a", "b", "c");
-    IMap<Integer, String> m = IMap.mapOf(pairOf(123, "abc"), pairOf(456, "def"), pairOf(789, "ghi"));
+ISet<String> s = ISet.setOf("a", "b", "c");
+IMap<Integer, String> m = IMap.mapOf(pairOf(123, "abc"), pairOf(456, "def"), pairOf(789, "ghi"));
+
+IOption<String> aSome = IOption.some("foo");
+IOption<String> aNone = IOption.none();
+IEither<Integer, String> aLeft = IEither.left(123);
+IEither<Integer, String> aRight = IEither.right("foo");
+```
 
 And more!
 
@@ -20,15 +27,19 @@ There are no transitive dependencies other than `org.jetbrains:annotations:13.0`
 
 Maven:
 
-    <dependency>
-        <groupId>dev.acdcjunior</groupId>
-        <artifactId>iimmutable</artifactId>
-        <version>1.0.0</version>
-    </dependency>
+```xml
+<dependency>
+    <groupId>dev.acdcjunior</groupId>
+    <artifactId>iimmutable</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
     
 Gradle:
 
-    implementation 'dev.acdcjunior:iimmutable:1.0.0'
+```groovy
+implementation 'dev.acdcjunior:iimmutable:1.0.0'
+```
 
 
 ## Why?
