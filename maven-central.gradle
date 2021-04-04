@@ -32,22 +32,22 @@ uploadArchives {
             }
 
             pom.project {
-                name 'Java6 Functional and Immutable'
+                name 'iimmutable'
                 packaging 'jar'
                 // optionally artifactId can be defined here
-                description 'Simple data structures to support functional and immutable programming in Java 6'
-                url 'https://github.com/acdcjunior/java6-functional-immutable'
+                description 'Immutable Data Structures for (Functional) Programming in Java 6+'
+                url 'https://github.com/acdcjunior/iimmutable'
 
                 scm {
-                    connection = 'scm:git:git@github.com:acdcjunior/java6-functional-immutable.git'
-                    developerConnection = 'scm:git:git@github.com:acdcjunior/java6-functional-immutable.git'
-                    url = 'git@github.com:acdcjunior/java6-functional-immutable.git'
+                    connection = 'scm:git:git@github.com:acdcjunior/iimmutable.git'
+                    developerConnection = 'scm:git:git@github.com:acdcjunior/iimmutable.git'
+                    url = 'git@github.com:acdcjunior/iimmutable.git'
                 }
 
                 licenses {
                     license {
                         name 'MIT License'
-                        url 'https://github.com/acdcjunior/java6-functional-immutable/blob/master/LICENSE'
+                        url 'https://github.com/acdcjunior/iimmutable/blob/master/LICENSE'
                     }
                 }
 
