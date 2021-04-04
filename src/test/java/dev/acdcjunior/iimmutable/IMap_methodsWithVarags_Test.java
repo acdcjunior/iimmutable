@@ -13,17 +13,17 @@ import static dev.acdcjunior.iimmutable.TestUtils.assertThatThrownBy;
 
 public class IMap_methodsWithVarags_Test {
 
-    static final IPair<String, Integer> pairK1 = IPair.pairOf("k1", 11111);
-    static final IPair<String, Integer> pairK2 = IPair.pairOf("k2", 22222);
-    static final IPair<String, Integer> pairK3 = IPair.pairOf("k3", 33333);
-    static final IPair<String, Integer> pairK4 = IPair.pairOf("k4", 44444);
-    static final IPair<String, Integer> pairK5 = IPair.pairOf("k5", 55555);
-    static final IPair<String, Integer> pairK6 = IPair.pairOf("k6", 66666);
-    static final IPair<String, Integer> pairK7 = IPair.pairOf("k7", 77777);
-    static final IPair<String, Integer> pairK8 = IPair.pairOf("k8", 88888);
-    static final IPair<String, Integer> pairK9 = IPair.pairOf("k9", 99999);
-    static final IPair<String, Integer> pairK10 = IPair.pairOf("k10", 1000000);
-    static final IPair<String, Integer> pairK11 = IPair.pairOf("k10", 1011111);
+    static final IPair<String, Integer> pairK1 = IPair.pairOf("k1", 111);
+    static final IPair<String, Integer> pairK2 = IPair.pairOf("k2", 222);
+    static final IPair<String, Integer> pairK3 = IPair.pairOf("k3", 333);
+    static final IPair<String, Integer> pairK4 = IPair.pairOf("k4", 444);
+    static final IPair<String, Integer> pairK5 = IPair.pairOf("k5", 555);
+    static final IPair<String, Integer> pairK6 = IPair.pairOf("k6", 666);
+    static final IPair<String, Integer> pairK7 = IPair.pairOf("k7", 777);
+    static final IPair<String, Integer> pairK8 = IPair.pairOf("k8", 888);
+    static final IPair<String, Integer> pairK9 = IPair.pairOf("k9", 999);
+    static final IPair<String, Integer> pairK10 = IPair.pairOf("k10", 101010);
+    static final IPair<String, Integer> pairK11 = IPair.pairOf("k11", 111111);
 
     static void verifyMapOfVarargs(Map<String, Integer> iMap, int n) {
         Map<String, Integer> map = createHashMap(n);
@@ -33,7 +33,7 @@ public class IMap_methodsWithVarags_Test {
     static Map<String, Integer> createHashMap(int n) {
         Map<String, Integer> map = new HashMap<String, Integer>();
         for (int i = 1; i <= n; i++) {
-            map.put("k" + i, Integer.valueOf("" + i + i + i + i + i));
+            map.put("k" + i, Integer.valueOf("" + i + i + i));
         }
         return map;
     }

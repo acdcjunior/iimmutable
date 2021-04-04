@@ -27,7 +27,7 @@ public class IMapTest {
 
     @Test
     public void toString__test() {
-        assertThat(iMap.toString()).isEqualTo("{k3=33333, k1=11111, k2=22222}");
+        assertThat(iMap.toString()).isEqualTo("{k3=333, k1=111, k2=222}");
     }
 
     @Test
@@ -56,13 +56,13 @@ public class IMapTest {
 
     @Test
     public void get() {
-        assertThat(iMap.get("k2")).isEqualTo(22222);
+        assertThat(iMap.get("k2")).isEqualTo(222);
         assertThat(iMap.get("@")).isNull();
     }
 
     @Test
     public void getOrDefault() {
-        assertThat(iMap.getOrDefault("k2", 99)).isEqualTo(22222);
+        assertThat(iMap.getOrDefault("k2", 99)).isEqualTo(222);
         assertThat(iMap.getOrDefault("@", 99)).isEqualTo(99);
 
         ISupplier<Integer> supplier99 = new ISupplier<Integer>() {
@@ -71,7 +71,7 @@ public class IMapTest {
                 return 99;
             }
         };
-        assertThat(iMap.getOrDefault("k2", supplier99)).isEqualTo(22222);
+        assertThat(iMap.getOrDefault("k2", supplier99)).isEqualTo(222);
         assertThat(iMap.getOrDefault("@", supplier99)).isEqualTo(99);
     }
 
