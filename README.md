@@ -3,6 +3,17 @@
 Yet another lib with simple immutable classes to support functional programming in Java 6+.
 One of our main goals is to always support Java 6, working as a lifeboat for those stuck with these versions.
 
+## Examples
+
+    IList<String> l = IList.listOf("a", "b", "c");
+    IPair<Integer, String> p = IPair.pairOf(123, "abc");
+    ITriple<Integer, String, Long> t = ITriple.tripleOf(123, "abc", 555L);
+
+    ISet<String> s = ISet.setOf("a", "b", "c");
+    IMap<Integer, String> m = IMap.mapOf(pairOf(123, "abc"), pairOf(456, "def"), pairOf(789, "ghi"));
+
+And more!
+
 ## Dependency
 
 There are no transitive dependencies other than `org.jetbrains:annotations:13.0` (for `@NotNull` and similar annotations).
