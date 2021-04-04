@@ -36,7 +36,6 @@ public class IList<T> implements Iterable<T> {
      * @since 1.0.0
      */
     @NotNull
-    @Contract(pure = true)
     public static <T> IList<T> listOf(@Nullable Iterator<T> iterator) {
         if (iterator == null) {
             return emptyList();
@@ -202,6 +201,7 @@ public class IList<T> implements Iterable<T> {
      * @since 1.0.0
      */
     @SuppressWarnings("unchecked")
+    @Contract(pure = true)
     public static <T> IList<T> emptyList() {
         return (IList<T>) EMPTY_ILIST;
     }
@@ -217,6 +217,7 @@ public class IList<T> implements Iterable<T> {
      * @since 1.0.0
      */
     @Override
+    @Contract(pure = true)
     public boolean equals(Object o) {
         if (o instanceof IList) {
             return immutableBackingList.equals(((IList<?>) o).immutableBackingList);
@@ -228,6 +229,7 @@ public class IList<T> implements Iterable<T> {
      * @since 1.0.0
      */
     @Override
+    @Contract(pure = true)
     public int hashCode() {
         return immutableBackingList.hashCode();
     }
@@ -236,6 +238,7 @@ public class IList<T> implements Iterable<T> {
      * @since 1.0.0
      */
     @Override
+    @Contract(pure = true)
     public String toString() {
         return immutableBackingList.toString();
     }
@@ -263,6 +266,7 @@ public class IList<T> implements Iterable<T> {
      */
     @NotNull
     @Override
+    @Contract(pure = true)
     public Iterator<T> iterator() {
         return immutableBackingList.iterator();
     }
@@ -752,6 +756,8 @@ public class IList<T> implements Iterable<T> {
      *
      * @since 1.0.0
      */
+    @NotNull
+    @Contract(pure = true)
     public T[] toArray(T[] a) {
         return immutableBackingList.toArray(a);
     }
@@ -787,6 +793,7 @@ public class IList<T> implements Iterable<T> {
      * @since 1.0.0
      */
     @NotNull
+    @Contract(pure = true)
     public String join(String separator) {
         StringBuilder sb = new StringBuilder(immutableBackingList.size() * JOIN_FUNCTION_DEFAULT_EXPECTED_ELEMENTS_STRING_SIZE);
         for (int i = 0, backingListSize = immutableBackingList.size(); i < backingListSize; i++) {
@@ -802,6 +809,7 @@ public class IList<T> implements Iterable<T> {
      * @since 1.0.0
      */
     @NotNull
+    @Contract(pure = true)
     public String join() {
         return this.join("");
     }
@@ -853,6 +861,7 @@ public class IList<T> implements Iterable<T> {
     /**
      * @since 1.0.0
      */
+    @Contract(pure = true)
     public boolean contains(T e) {
         return immutableBackingList.contains(e);
     }
@@ -867,6 +876,8 @@ public class IList<T> implements Iterable<T> {
      *
      * @since 1.0.0
      */
+    @Nullable
+    @Contract(pure = true)
     public T get(int index) {
         rangeCheck(index, size(), "Cannot `get(%d)`: ", index);
 
@@ -884,6 +895,8 @@ public class IList<T> implements Iterable<T> {
     /**
      * @since 1.0.0
      */
+    @NotNull
+    @Contract(pure = true)
     public IList<T> set(int index, T e) {
         rangeCheck(index, size(), "Cannot `set(%d, %s)`: ", index, e);
 
@@ -895,6 +908,8 @@ public class IList<T> implements Iterable<T> {
     /**
      * @since 1.0.0
      */
+    @NotNull
+    @Contract(pure = true)
     public IList<T> remove(int index) {
         rangeCheck(index, size(), "Cannot `remove(%d)`: ", index);
 
@@ -912,6 +927,7 @@ public class IList<T> implements Iterable<T> {
      *
      * @since 1.0.0
      */
+    @NotNull
     @Contract(pure = true)
     public IList<T> subList(int fromIndex, int toIndex) {
         subListRangeCheck(fromIndex, toIndex, size());

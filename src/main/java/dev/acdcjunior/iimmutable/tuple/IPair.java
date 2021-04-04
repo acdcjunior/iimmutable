@@ -1,5 +1,9 @@
 package dev.acdcjunior.iimmutable.tuple;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 
 /**
  * @since 1.0.0
@@ -9,14 +13,18 @@ public class IPair<A, B> {
     /**
      * @since 1.0.0
      */
-    public static <A, B> IPair<A, B> pairOf(A a, B b) {
+    @NotNull
+    @Contract(pure = true)
+    public static <A, B> IPair<A, B> pairOf(@Nullable A a, @Nullable B b) {
         return new IPair<A, B>(a, b);
     }
 
+    @Nullable
     private final A a;
+    @Nullable
     private final B b;
 
-    private IPair(A a, B b) {
+    private IPair(@Nullable A a, @Nullable B b) {
         this.a = a;
         this.b = b;
     }
@@ -25,6 +33,7 @@ public class IPair<A, B> {
      * @since 1.0.0
      */
     @Override
+    @Contract(pure = true)
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -37,6 +46,7 @@ public class IPair<A, B> {
      * @since 1.0.0
      */
     @Override
+    @Contract(pure = true)
     public int hashCode() {
         int result = a != null ? a.hashCode() : 0;
         result = 31 * result + (b != null ? b.hashCode() : 0);
@@ -47,6 +57,8 @@ public class IPair<A, B> {
      * @since 1.0.0
      */
     @Override
+    @NotNull
+    @Contract(pure = true)
     public String toString() {
         return "(" + a + ", " + b + ')';
     }
@@ -54,6 +66,8 @@ public class IPair<A, B> {
     /**
      * @since 1.0.0
      */
+    @Nullable
+    @Contract(pure = true)
     public A getLeft() {
         return a;
     }
@@ -63,6 +77,8 @@ public class IPair<A, B> {
      *
      * @since 1.0.0
      */
+    @Nullable
+    @Contract(pure = true)
     public A left() {
         return a;
     }
@@ -72,6 +88,8 @@ public class IPair<A, B> {
      *
      * @since 1.0.0
      */
+    @Nullable
+    @Contract(pure = true)
     public A getA() {
         return a;
     }
@@ -81,6 +99,8 @@ public class IPair<A, B> {
      *
      * @since 1.0.0
      */
+    @Nullable
+    @Contract(pure = true)
     public A getKey() {
         return a;
     }
@@ -90,6 +110,8 @@ public class IPair<A, B> {
      *
      * @since 1.0.0
      */
+    @Nullable
+    @Contract(pure = true)
     public A key() {
         return a;
     }
@@ -97,6 +119,8 @@ public class IPair<A, B> {
     /**
      * @since 1.0.0
      */
+    @Nullable
+    @Contract(pure = true)
     public B getRight() {
         return b;
     }
@@ -106,6 +130,8 @@ public class IPair<A, B> {
      *
      * @since 1.0.0
      */
+    @Nullable
+    @Contract(pure = true)
     public B right() {
         return b;
     }
@@ -115,6 +141,8 @@ public class IPair<A, B> {
      *
      * @since 1.0.0
      */
+    @Nullable
+    @Contract(pure = true)
     public B getB() {
         return b;
     }
@@ -124,6 +152,8 @@ public class IPair<A, B> {
      *
      * @since 1.0.0
      */
+    @Nullable
+    @Contract(pure = true)
     public B getValue() {
         return b;
     }
@@ -133,6 +163,8 @@ public class IPair<A, B> {
      *
      * @since 1.0.0
      */
+    @Nullable
+    @Contract(pure = true)
     public B value() {
         return b;
     }

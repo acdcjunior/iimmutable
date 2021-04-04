@@ -1,5 +1,9 @@
 package dev.acdcjunior.iimmutable.tuple;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 
 /**
  * @since 1.0.0
@@ -9,15 +13,20 @@ public class ITriple<A, B, C> {
     /**
      * @since 1.0.0
      */
-    public static <A, B, C> ITriple<A, B, C> tripleOf(A a, B b, C c) {
+    @NotNull
+    @Contract(pure = true)
+    public static <A, B, C> ITriple<A, B, C> tripleOf(@Nullable A a, @Nullable B b, @Nullable C c) {
         return new ITriple<A, B, C>(a, b, c);
     }
 
+    @Nullable
     private final A a;
+    @Nullable
     private final B b;
+    @Nullable
     private final C c;
 
-    private ITriple(A a, B b, C c) {
+    private ITriple(@Nullable A a, @Nullable B b, @Nullable C c) {
         this.a = a;
         this.b = b;
         this.c = c;
@@ -27,6 +36,7 @@ public class ITriple<A, B, C> {
      * @since 1.0.0
      */
     @Override
+    @Contract(pure = true)
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -40,6 +50,7 @@ public class ITriple<A, B, C> {
      * @since 1.0.0
      */
     @Override
+    @Contract(pure = true)
     public int hashCode() {
         int result = a != null ? a.hashCode() : 0;
         result = 31 * result + (b != null ? b.hashCode() : 0);
@@ -50,6 +61,8 @@ public class ITriple<A, B, C> {
     /**
      * @since 1.0.0
      */
+    @Nullable
+    @Contract(pure = true)
     public A getA() {
         return a;
     }
@@ -57,6 +70,8 @@ public class ITriple<A, B, C> {
     /**
      * @since 1.0.0
      */
+    @Nullable
+    @Contract(pure = true)
     public B getB() {
         return b;
     }
@@ -64,6 +79,8 @@ public class ITriple<A, B, C> {
     /**
      * @since 1.0.0
      */
+    @Nullable
+    @Contract(pure = true)
     public C getC() {
         return c;
     }

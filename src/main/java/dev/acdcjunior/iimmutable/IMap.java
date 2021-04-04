@@ -248,6 +248,7 @@ public class IMap<K, V> {
      * @since 1.0.0
      */
     @Override
+    @Contract(pure = true)
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -259,6 +260,7 @@ public class IMap<K, V> {
      * @since 1.0.0
      */
     @Override
+    @Contract(pure = true)
     public int hashCode() {
         return immutableBackingMap.hashCode();
     }
@@ -267,6 +269,7 @@ public class IMap<K, V> {
      * @since 1.0.0
      */
     @Override
+    @Contract(pure = true)
     public String toString() {
         return immutableBackingMap.toString();
     }

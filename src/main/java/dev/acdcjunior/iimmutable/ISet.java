@@ -24,6 +24,7 @@ public class ISet<T> {
     /**
      * @since 1.0.0
      */
+    @NotNull
     @Contract(pure = true)
     public static <T> ISet<T> setOf(T... elements) {
         return new ISet<T>(listOf(elements));
@@ -82,6 +83,7 @@ public class ISet<T> {
      * @since 1.0.0
      */
     @Override
+    @NotNull
     @Contract(pure = true)
     public String toString() {
         return immutableBackingSet.toString();
