@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * An immutable list.
  *
- * @param <T> The type of the elements.
+ * @param <T> The type of the elements of the list.
  *
  * @since 1.0.0
  */
@@ -30,6 +30,9 @@ public class IList<T> implements Iterable<T> {
     private static final IList EMPTY_ILIST = new IList(Collections.emptyList());
 
     /**
+     * @param iterator Collection of elements of the new list.
+     * @return A new immutable list.
+     * @param <T> The type of the elements of the list.
      * @since 1.0.0
      */
     @NotNull
@@ -42,6 +45,8 @@ public class IList<T> implements Iterable<T> {
     }
 
     /**
+     * @param <T> The type of the elements of the list.
+     *
      * @since 1.0.0
      */
     @NotNull
@@ -58,51 +63,142 @@ public class IList<T> implements Iterable<T> {
     }
 
     /**
+     * @param t1 Element for the list.
+     * @return A new immutable list.
+     * @param <T> The type of the elements of the list.
+     *
      * @since 1.0.0
      */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1) { return listOfVarags(t1); }
     /**
+     * @param t1 Element for the list.
+     * @param t2 Element for the list.
+     * @return A new immutable list.
+     * @param <T> The type of the elements of the list.
+     *
      * @since 1.0.0
      */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2) { return listOfVarags(t1, t2); }
     /**
+     * @param t1 Element for the list.
+     * @param t2 Element for the list.
+     * @param t3 Element for the list.
+     * @return A new immutable list.
+     * @param <T> The type of the elements of the list.
+     *
      * @since 1.0.0
      */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3) { return listOfVarags(t1, t2, t3); }
     /**
+     * @param t1 Element for the list.
+     * @param t2 Element for the list.
+     * @param t3 Element for the list.
+     * @param t4 Element for the list.
+     * @return A new immutable list.
+     * @param <T> The type of the elements of the list.
+     *
      * @since 1.0.0
      */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4) { return listOfVarags(t1, t2, t3, t4); }
     /**
+     * @param t1 Element for the list.
+     * @param t2 Element for the list.
+     * @param t3 Element for the list.
+     * @param t4 Element for the list.
+     * @param t5 Element for the list.
+     * @return A new immutable list.
+     * @param <T> The type of the elements of the list.
+     *
      * @since 1.0.0
      */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5) { return listOfVarags(t1, t2, t3, t4, t5); }
     /**
+     * @param t1 Element for the list.
+     * @param t2 Element for the list.
+     * @param t3 Element for the list.
+     * @param t4 Element for the list.
+     * @param t5 Element for the list.
+     * @param t6 Element for the list.
+     * @return A new immutable list.
+     * @param <T> The type of the elements of the list.
+     *
      * @since 1.0.0
      */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5, T t6) { return listOfVarags(t1, t2, t3, t4, t5, t6); }
     /**
+     * @param t1 Element for the list.
+     * @param t2 Element for the list.
+     * @param t3 Element for the list.
+     * @param t4 Element for the list.
+     * @param t5 Element for the list.
+     * @param t6 Element for the list.
+     * @param t7 Element for the list.
+     * @return A new immutable list.
+     * @param <T> The type of the elements of the list.
+     *
      * @since 1.0.0
      */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5, T t6, T t7) { return listOfVarags(t1, t2, t3, t4, t5, t6, t7); }
     /**
+     * @param t1 Element for the list.
+     * @param t2 Element for the list.
+     * @param t3 Element for the list.
+     * @param t4 Element for the list.
+     * @param t5 Element for the list.
+     * @param t6 Element for the list.
+     * @param t7 Element for the list.
+     * @param t8 Element for the list.
+     * @return A new immutable list.
+     * @param <T> The type of the elements of the list.
+     *
      * @since 1.0.0
      */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8) { return listOfVarags(t1, t2, t3, t4, t5, t6, t7, t8); }
     /**
+     * @param t1 Element for the list.
+     * @param t2 Element for the list.
+     * @param t3 Element for the list.
+     * @param t4 Element for the list.
+     * @param t5 Element for the list.
+     * @param t6 Element for the list.
+     * @param t7 Element for the list.
+     * @param t8 Element for the list.
+     * @param t9 Element for the list.
+     * @return A new immutable list.
+     * @param <T> The type of the elements of the list.
+     *
      * @since 1.0.0
      */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8, T t9) { return listOfVarags(t1, t2, t3, t4, t5, t6, t7, t8, t9); }
     /**
+     * @param t1 Element for the list.
+     * @param t2 Element for the list.
+     * @param t3 Element for the list.
+     * @param t4 Element for the list.
+     * @param t5 Element for the list.
+     * @param t6 Element for the list.
+     * @param t7 Element for the list.
+     * @param t8 Element for the list.
+     * @param t9 Element for the list.
+     * @param t10 Element for the list.
+     * @return A new immutable list.
+     * @param <T> The type of the elements of the list.
+     *
      * @since 1.0.0
      */
     @NotNull @Contract(pure = true) @SuppressWarnings("unchecked") public static <T> IList<T> listOf(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8, T t9, T t10) { return listOfVarags(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10); }
     /**
+     * @param items Elements for the list.
+     * @return A new immutable list.
+     * @param <T> The type of the elements of the list.
+     *
      * @since 1.0.0
      */
     @NotNull @Contract(pure = true) public static <T> IList<T> listOf(@Nullable T... items) { return listOfVarags(items); }
 
     /**
+     * @param <T> The type of the elements of the list.
+     *
      * @since 1.0.0
      */
     @SuppressWarnings("unchecked")
