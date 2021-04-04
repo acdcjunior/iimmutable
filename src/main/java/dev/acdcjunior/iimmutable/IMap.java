@@ -57,10 +57,10 @@ public class IMap<K, V> {
     }
 
     /**
-     * @param entry1 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])} .
-     * @param entry2 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])} .
-     * @param entry3 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])} .
-     * @param entry4 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])} .
+     * @param entry1 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry2 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry3 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry4 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
      * @since 1.0.0
      */
     @NotNull
@@ -70,11 +70,11 @@ public class IMap<K, V> {
     }
 
     /**
-     * @param entry1 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])} .
-     * @param entry2 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])} .
-     * @param entry3 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])} .
-     * @param entry4 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])} .
-     * @param entry5 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])} .
+     * @param entry1 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry2 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry3 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry4 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry5 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
      * @since 1.0.0
      */
     @NotNull
@@ -84,7 +84,112 @@ public class IMap<K, V> {
     }
 
     /**
-     * @param entries List of entries. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])} .
+     * @param entry1 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry2 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry3 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry4 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry5 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry6 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param <K> The type of the keys.
+     * @param <V> The type of the values.
+     * @return A new immutable map.
+     *
+     * @since 1.0.0
+     */
+    @NotNull
+    @Contract(pure = true)
+    public static <K, V> IMap<K, V> mapOf(@NotNull IPair<K, V> entry1, @NotNull IPair<K, V> entry2, @NotNull IPair<K, V> entry3, @NotNull IPair<K, V> entry4, @NotNull IPair<K, V> entry5, @NotNull IPair<K, V> entry6) {
+        return mapOf(IList.listOf(entry1, entry2, entry3, entry4, entry5, entry6));
+    }
+
+    /**
+     * @param entry1 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry2 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry3 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry4 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry5 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry6 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry7 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param <K> The type of the keys.
+     * @param <V> The type of the values.
+     * @return A new immutable map.
+     *
+     * @since 1.0.0
+     */
+    @NotNull
+    @Contract(pure = true)
+    public static <K, V> IMap<K, V> mapOf(@NotNull IPair<K, V> entry1, @NotNull IPair<K, V> entry2, @NotNull IPair<K, V> entry3, @NotNull IPair<K, V> entry4, @NotNull IPair<K, V> entry5, @NotNull IPair<K, V> entry6, @NotNull IPair<K, V> entry7) {
+        return mapOf(IList.listOf(entry1, entry2, entry3, entry4, entry5, entry6, entry7));
+    }
+
+    /**
+     * @param entry1 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry2 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry3 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry4 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry5 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry6 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry7 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry8 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param <K> The type of the keys.
+     * @param <V> The type of the values.
+     * @return A new immutable map.
+     *
+     * @since 1.0.0
+     */
+    @NotNull
+    @Contract(pure = true)
+    public static <K, V> IMap<K, V> mapOf(@NotNull IPair<K, V> entry1, @NotNull IPair<K, V> entry2, @NotNull IPair<K, V> entry3, @NotNull IPair<K, V> entry4, @NotNull IPair<K, V> entry5, @NotNull IPair<K, V> entry6, @NotNull IPair<K, V> entry7, @NotNull IPair<K, V> entry8) {
+        return mapOf(IList.listOf(entry1, entry2, entry3, entry4, entry5, entry6, entry7, entry8));
+    }
+
+    /**
+     * @param entry1 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry2 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry3 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry4 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry5 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry6 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry7 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry8 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry9 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param <K> The type of the keys.
+     * @param <V> The type of the values.
+     * @return A new immutable map.
+     *
+     * @since 1.0.0
+     */
+    @NotNull
+    @Contract(pure = true)
+    public static <K, V> IMap<K, V> mapOf(@NotNull IPair<K, V> entry1, @NotNull IPair<K, V> entry2, @NotNull IPair<K, V> entry3, @NotNull IPair<K, V> entry4, @NotNull IPair<K, V> entry5, @NotNull IPair<K, V> entry6, @NotNull IPair<K, V> entry7, @NotNull IPair<K, V> entry8, @NotNull IPair<K, V> entry9) {
+        return mapOf(IList.listOf(entry1, entry2, entry3, entry4, entry5, entry6, entry7, entry8, entry9));
+    }
+
+    /**
+     * @param entry1 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry2 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry3 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry4 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry5 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry6 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry7 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry8 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry9 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param entry10 Entry for the map. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
+     * @param <K> The type of the keys.
+     * @param <V> The type of the values.
+     * @return A new immutable map.
+     *
+     * @since 1.0.0
+     */
+    @NotNull
+    @Contract(pure = true)
+    public static <K, V> IMap<K, V> mapOf(@NotNull IPair<K, V> entry1, @NotNull IPair<K, V> entry2, @NotNull IPair<K, V> entry3, @NotNull IPair<K, V> entry4, @NotNull IPair<K, V> entry5, @NotNull IPair<K, V> entry6, @NotNull IPair<K, V> entry7, @NotNull IPair<K, V> entry8, @NotNull IPair<K, V> entry9, @NotNull IPair<K, V> entry10) {
+        return mapOf(IList.listOf(entry1, entry2, entry3, entry4, entry5, entry6, entry7, entry8, entry9, entry10));
+    }
+
+    /**
+     * @param entries List of entries. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
      * @since 1.0.0
      */
     @NotNull
@@ -94,7 +199,7 @@ public class IMap<K, V> {
     }
 
     /**
-     * @param entryList List of entries. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])} .
+     * @param entryList List of entries. Cannot be {@code null}. (If you wish to pass {@code null}, see {@link #mapOfNonNull(IPair[])}.
      * @since 1.0.0
      */
     @NotNull
